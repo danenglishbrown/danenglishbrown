@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel English-Brown | Lead Web Developer & Theoretical Physicist</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0a0e1a;
+            --secondary-bg: #1a1f35;
+            --accent-bg: #2d3748;
+            --primary-text: #e2e8f0;
+            --secondary-text: #a0aec0;
+            --accent-color: #4299e1;
+            --accent-hover: #3182ce;
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+            --border-color: #2d3748;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #4299e1 0%, #667eea 100%);
+            --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="light"] {
+            --primary-bg: #f7fafc;
+            --secondary-bg: #ffffff;
+            --accent-bg: #edf2f7;
+            --primary-text: #1a202c;
+            --secondary-text: #4a5568;
+            --accent-color: #3182ce;
+            --accent-hover: #2c5aa0;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-bg);
+            color: var(--primary-text);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        /* Physics Equations Background */
+        .physics-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.03;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .equation {
+            position: absolute;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            white-space: nowrap;
+            animation: floatEquation 20s linear infinite;
+        }
+
+        [data-theme="light"] .equation {
+            opacity: 0.05;
+        }
+
+        @keyframes floatEquation {
+            from {
+                transform: translateX(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            to {
+                transform: translateX(calc(100vw + 100px)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--accent-color);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            33% { transform: translateY(-20px) rotate(120deg) scale(1.1); }
+            66% { transform: translateY(10px) rotate(240deg) scale(0.9); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 31, 53, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        [data-theme="light"] nav {
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-text);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 0.7rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: var(--secondary-bg);
+            transform: rotate(180deg) scale(1.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.6rem;
+            color: var(--secondary-text);
+            margin-bottom: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--gradient-2);
+            color: white;
+            box-shadow: var(--card-shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 30px 35px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-2);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .profile-placeholder {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+            margin: 0 auto;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-placeholder:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--secondary-bg);
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .skill-category {
+            background: var(--secondary-bg);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-8px);
+        }
+
+        .skill-category h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-list li:hover {
+            color: var(--accent-color);
+            padding-left: 1rem;
+        }
+
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: var(--secondary-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 35px 40px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-header {
+            padding: 2rem;
+            background: var(--gradient-2);
+            color: white;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-type {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-description {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: var(--accent-bg);
+            color: var(--accent-color);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tech-tag:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: var(--secondary-bg);
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .testimonials-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--accent-color);
+        }
+
+        .testimonials-carousel {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .testimonial-card {
+            min-width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            padding: 2rem;
+        }
+
+        .testimonial-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .testimonial-content {
+            flex: 1;
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial-role {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .carousel-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .carousel-btn:hover {
+            background: var(--accent-hover);
+            transform: scale(1.1);
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 1.5rem;
+            border-radius: 15px;
+            background: var(--secondary-bg);
+        }
+
+        .contact-item:hover {
+            color: var(--accent-hover);
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-hover);
+            transform: scale(1.2);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Interactive Elements */
+        .interactive-hover {
+            transition: all 0.3s ease;
+        }
+
+        .interactive-hover:hover {
+            transform: scale(1.05);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-content .subtitle {
+                font-size: 1.3rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .profile-placeholder {
+                width: 250px;
+                height: 250px;
+                font-size: 3.5rem;
+            }
+
+            .testimonial-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            section {
+                padding: 5rem 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Navbar scroll behavior */
+        nav.hidden {
+            transform: translateY(-100%);
+        }
+
+        /* Mobile menu styles */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 10;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 10px;
+            transition: all 0.3s linear;
+            position: relative;
+            transform-origin: 1px;
+        }
+
+        /* Mobile menu open state */
+        .nav-links.mobile-open {
+            transform: translateX(0%);
+        }
+
+        /* Enhanced physics equations */
+        .physics-bg .equation.derivation {
+            font-size: 1rem;
+            color: var(--success-color);
+            opacity: 0.7;
+        }
+
+        /* Media queries for mobile responsiveness */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 70%;
+                background: var(--secondary-bg);
+                flex-direction: column;
+                padding: 5rem 2rem;
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            /* Ensure text is visible in light mode when navbar has background */
+            [data-theme="light"] nav.scrolled .nav-links a {
+                color: white;
+            }
+
+            [data-theme="light"] nav.scrolled .nav-links a:hover {
+                color: var(--accent-hover);
+            }
+        }
+
+        /* Navbar background when scrolled */
+        nav.scrolled {
+            background: rgba(26, 31, 53, 0.98) !important;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="light"] nav.scrolled {
+            background: rgba(26, 31, 53, 0.98) !important;
+        }
+
+        [data-theme="light"] nav.scrolled .nav-links a {
+            color: white;
+        }
+
+        [data-theme="light"] nav.scrolled .logo {
+            color: white;
+        }
+
+        [data-theme="light"] nav.scrolled .hamburger span {
+            background: white;
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Physics Equations Background -->
+    <div class="physics-bg" id="physicsBg"></div>
+
+    <!-- Animated Background -->
+    <div class="bg-animation" id="bgAnimation"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">D.E-B</div>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Daniel English-Brown</h1>
+            <p class="subtitle">Lead Web Developer • Theoretical Physicist • MSc Student</p>
+            <p>Building the future of fintech through AI-powered solutions while advancing the frontiers of theoretical physics and computational modeling.</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i> View Projects
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <i class="fas fa-envelope"></i> Get In Touch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="fade-in">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-image">
+                <div class="profile-placeholder interactive-hover">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+            <div class="about-text">
+                <p>I'm currently the Lead Web Developer at Expendid, where I architect AI-powered finance management platforms for freelancers. As an MSc Theoretical Physics student at King's College London, I bridge the gap between cutting-edge technology and fundamental science.</p>
+                
+                <p>My journey spans from electromagnetic simulations and quantitative research to full-stack web development and fintech innovation. I specialize in creating scalable, user-centric applications while maintaining a strong foundation in computational physics and mathematical modeling.</p>
+                
+                <p>Beyond technology, I'm passionate about STEM education, mentoring robotics teams, and cross-cultural communication through my proficiency in English, Chinese (C1), and French (B2).</p>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item interactive-hover">
+                <div class="stat-number">1510</div>
+                <div>SAT Score (99th percentile)</div>
+            </div>
+            <div class="stat-item interactive-hover">
+                <div class="stat-number">C1</div>
+                <div>Chinese Proficiency (HSK 5)</div>
+            </div>
+            <div class="stat-item interactive-hover">
+                <div class="stat-number">5+</div>
+                <div>Programming Languages</div>
+            </div>
+            <div class="stat-item interactive-hover">
+                <div class="stat-number">2026</div>
+                <div>MSc Graduation</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="fade-in">
+        <h2 class="section-title">Technical Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3><i class="fas fa-code"></i> Web Development</h3>
+                <ul class="skill-list">
+                    <li>Python (Flask, Django)</li>
+                    <li>JavaScript (React, Node.js)</li>
+                    <li>HTML/CSS (Responsive Design)</li>
+                    <li>Database Management</li>
+                    <li>UI/UX Design</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-chart-line"></i> Quantitative Finance</h3>
+                <ul class="skill-list">
+                    <li>Black-Scholes & Binomial Models</li>
+                    <li>Portfolio Optimization (CVXPY)</li>
+                    <li>Risk Analysis & Assessment</li>
+                    <li>Derivatives Valuation</li>
+                    <li>Financial Time Series</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-atom"></i> Computational Physics</h3>
+                <ul class="skill-list">
+                    <li>FDTD Electromagnetic Simulation</li>
+                    <li>Finite Difference Methods</li>
+                    <li>Numerical Analysis</li>
+                    <li>Scientific Computing</li>
+                    <li>Data Visualization</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-tools"></i> Development Tools</h3>
+                <ul class="skill-list">
+                    <li>Git & Version Control</li>
+                    <li>LaTeX & Technical Writing</li>
+                    <li>Adobe Creative Suite</li>
+                    <li>MATLAB & Python</li>
+                    <li>Docker & Deployment</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="fade-in">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">Expendid Finance Platform</div>
+                    <div class="project-type">Lead Web Developer • Current Role</div>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        Developed a comprehensive Finite Difference Time Domain software for computational electrodynamics, featuring planar-graded index lenses, photonic crystals, and invisibility cloak simulations.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">NumPy</span>
+                        <span class="tech-tag">Matplotlib</span>
+                        <span class="tech-tag">Numerical Analysis</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">Quantitative Trading Models</div>
+                    <div class="project-type">Finance • Perbak Capital Partners</div>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        Implemented Black-Scholes and binomial option pricing models, developed market-neutral portfolios using convex optimization, and analyzed non-normal return distributions.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">CVXPY</span>
+                        <span class="tech-tag">Financial Modeling</span>
+                        <span class="tech-tag">Risk Analysis</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">Girls Robotics Challenge</div>
+                    <div class="project-type">STEM Education • Team Mentor</div>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        Led and mentored a team of eight students in the UK's inaugural all-girls national robotics competition, guiding them through design, programming, and project management.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">BBC micro:bit</span>
+                        <span class="tech-tag">Robotics</span>
+                        <span class="tech-tag">Team Leadership</span>
+                        <span class="tech-tag">STEM Education</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section - CLEARLY LABELED FOR EASY COMMENTING OUT -->
+    <section id="testimonials" class="fade-in">
+        <!-- START TESTIMONIALS SECTION - COMMENT OUT FROM HERE -->
+        <h2 class="section-title">Client Reviews & Testimonials</h2>
+        <div class="testimonials">
+            <div class="testimonials-carousel">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">
+                                "Daniel's technical expertise and attention to detail transformed our vision into a robust, scalable platform. His ability to bridge complex backend architecture with intuitive user experience is exceptional."
+                            </p>
+                            <div class="testimonial-author">Sarah Chen</div>
+                            <div class="testimonial-role">CTO, Expendid</div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">
+                                "Daniel's mentorship of our robotics team was transformative. He simplified complex engineering concepts and guided the students to develop both technical skills and confidence."
+                            </p>
+                            <div class="testimonial-author">Dr. Maria Rodriguez</div>
+                            <div class="testimonial-role">STEM Education Coordinator, King's College London</div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">
+                                "His quantitative research skills and mathematical rigor brought valuable insights to our trading strategies. Daniel combines theoretical depth with practical application beautifully."
+                            </p>
+                            <div class="testimonial-author">James Park</div>
+                            <div class="testimonial-role">Senior Analyst, Perbak Capital Partners</div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">
+                                "As a private tutor, Daniel's ability to adapt his teaching style to each student's needs is remarkable. My daughter's confidence in mathematics improved dramatically under his guidance."
+                            </p>
+                            <div class="testimonial-author">Emma Thompson</div>
+                            <div class="testimonial-role">Parent</div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">
+                                "Daniel's FDTD simulation work demonstrated exceptional computational physics skills. His code optimization and visualization techniques were particularly impressive."
+                            </p>
+                            <div class="testimonial-author">Dr. Francisco Rodrigo Fortuno</div>
+                            <div class="testimonial-role">Physics Supervisor, King's College London</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="carousel-controls">
+                <button class="carousel-btn" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div class="carousel-indicators" id="indicators">
+                <div class="indicator active" data-index="0"></div>
+                <div class="indicator" data-index="1"></div>
+                <div class="indicator" data-index="2"></div>
+                <div class="indicator" data-index="3"></div>
+                <div class="indicator" data-index="4"></div>
+            </div>
+        </div>
+        <!-- END TESTIMONIALS SECTION - COMMENT OUT TO HERE -->
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="fade-in">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+            <p>Interested in collaboration, web development projects, PhD opportunities, or quantitative finance roles? Let's discuss how we can work together.</p>
+            
+            <div class="contact-info">
+                <a href="mailto:danielenglish.zim13@gmail.com" class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>danielenglish.zim13@gmail.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/daniel-english-brown/" class="contact-item" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn Profile</span>
+                </a>
+                <a href="tel:+447752677301" class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+44 7752 677301</span>
+                </a>
+            </div>
+
+            <div class="cv-download">
+                <a href="#" class="btn btn-primary" id="downloadCV">
+                    <i class="fas fa-download"></i> Download CV
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/daniel-english-brown" class="footer-link" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/daniel-english-brown/" class="footer-link" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:danielenglish.zim13@gmail.com" class="footer-link" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="#" class="footer-link" title="Research Gate">
+                    <i class="fab fa-researchgate"></i>
+                </a>
+            </div>
+            <p>&copy; 2025 Daniel English-Brown. Built with passion for physics and code.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced physics equations for background
+        const physicsEquations = [
+            "∇ × E = -∂B/∂t",
+            "∇ × B = μ₀J + μ₀ε₀∂E/∂t",
+            "∇ · E = ρ/ε₀",
+            "∇ · B = 0",
+            "ψ(x,t) = Ae^(i(kx-ωt))",
+            "Ĥψ = Eψ",
+            "E = mc²",
+            "F = ma",
+            "∫₀^∞ e^(-x²)dx = √π/2",
+            "S = k ln Ω",
+            "dS/dt ≥ 0",
+            "∂S/∂E = 1/T",
+            "Black-Scholes: ∂V/∂t + ½σ²S²∂²V/∂S² + rS∂V/∂S - rV = 0",
+            "P(A|B) = P(B|A)P(A)/P(B)",
+            "∑ᵢ pᵢ = 1",
+            "⟨x⟩ = ∫ x|ψ(x)|²dx",
+            // Derivations
+            "F = G(m₁m₂)/r²",
+            "E = hf = hc/λ",
+            "λ = h/p",
+            "ΔxΔp ≥ ħ/2",
+            "ψₙ(x) = √(2/L) sin(nπx/L)",
+            "aₙ = √(2/π)∫ψ(x)sin(nx)dx",
+            "T = 2π√(L/g)",
+            "F = q(E + v × B)",
+            "I = ∫J·dA",
+            "∮B·dl = μ₀I_enc",
+            "Φ = ∫B·dA",
+            "ε = -dΦ/dt",
+            "∇²ψ + (2m/ħ²)(E - V)ψ = 0",
+            "ρ = |ψ|²",
+            "⟨A⟩ = ∫ψ*Âψ dx"
+        ];
+
+        // Mobile menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        const navbar = document.getElementById('navbar');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('mobile-open');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('mobile-open');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll behavior
+        let lastScrollY = window.scrollY;
+        
+        window.addEventListener('scroll', () => {
+            // Show/hide navbar based on scroll direction
+            if (window.scrollY > lastScrollY && window.scrollY > 100) {
+                navbar.classList.add('hidden');
+            } else {
+                navbar.classList.remove('hidden');
+            }
+            
+            // Add background when scrolled
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            lastScrollY = window.scrollY;
+        });
+
+        // Enhanced physics equations generation
+        function createPhysicsEquations() {
+            const physicsBg = document.getElementById('physicsBg');
+            
+            setInterval(() => {
+                const equation = document.createElement('div');
+                equation.className = Math.random() > 0.7 ? 'equation derivation' : 'equation';
+                equation.textContent = physicsEquations[Math.floor(Math.random() * physicsEquations.length)];
+                equation.style.top = Math.random() * 100 + '%';
+                equation.style.left = '-100px';
+                equation.style.fontSize = (Math.random() * 0.8 + 0.8) + 'rem';
+                equation.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                equation.style.opacity = Math.random() * 0.5 + 0.1; // Vary opacity
+                physicsBg.appendChild(equation);
+
+                // Remove equation after animation
+                setTimeout(() => {
+                    equation.remove();
+                }, 25000);
+            }, 2000); // More frequent equations
+        }
+
+
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const themeIcon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        body.setAttribute('data-theme', savedTheme);
+        themeIcon.className = savedTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+
+        // Animated Background Particles
+        function createParticles() {
+            const bgAnimation = document.getElementById('bgAnimation');
+            const particleCount = 60;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 6 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
+                bgAnimation.appendChild(particle);
+            }
+        }
+
+        // Testimonials Carousel
+        let currentTestimonial = 0;
+        const testimonialTrack = document.getElementById('testimonialTrack');
+        const indicators = document.querySelectorAll('.indicator');
+        const totalTestimonials = 5;
+
+        function showTestimonial(index) {
+            const translateX = -index * 100;
+            testimonialTrack.style.transform = `translateX(${translateX}%)`;
+            
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            indicators[index].classList.add('active');
+            
+            currentTestimonial = index;
+        }
+
+        function nextTestimonial() {
+            const next = (currentTestimonial + 1) % totalTestimonials;
+            showTestimonial(next);
+        }
+
+        function prevTestimonial() {
+            const prev = (currentTestimonial - 1 + totalTestimonials) % totalTestimonials;
+            showTestimonial(prev);
+        }
+
+        // Carousel controls
+        document.getElementById('nextBtn').addEventListener('click', nextTestimonial);
+        document.getElementById('prevBtn').addEventListener('click', prevTestimonial);
+
+        // Indicator clicks
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => showTestimonial(index));
+        });
+
+        // Auto-advance testimonials
+        setInterval(nextTestimonial, 6000);
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0s';
+                    entry.target.style.animationName = 'fadeInUp';
+                    entry.target.style.animationFillMode = 'both';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Loading Screen
+        window.addEventListener('load', () => {
+            const loading = document.getElementById('loading');
+            setTimeout(() => {
+                loading.style.opacity = '0';
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // Dynamic Typing Effect
+        function typeWriter(element, text, speed = 80) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            setTimeout(type, 2000);
+        }
+
+        // Stats Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            
+            counters.forEach(counter => {
+                const target = counter.innerText;
+                const isNumber = !isNaN(target);
+                
+                if (isNumber) {
+                    const increment = target / 200;
+                    let current = 0;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            counter.innerText = target;
+                            clearInterval(timer);
+                        } else {
+                            counter.innerText = Math.ceil(current);
+                        }
+                    }, 15);
+                }
+            });
+        }
+
+        // Enhanced Parallax Effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const particles = document.querySelectorAll('.particle');
+            
+            particles.forEach((particle, index) => {
+                const speed = (index % 3 + 1) * 0.3;
+                particle.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.05}deg)`;
+            });
+
+            // Update navigation background
+            const nav = document.querySelector('nav');
+            const opacity = Math.min(scrolled / 100, 0.95);
+            const currentTheme = body.getAttribute('data-theme');
+            const bgColor = currentTheme === 'light' ? '255, 255, 255' : '26, 31, 53';
+            nav.style.background = `rgba(${bgColor}, ${opacity})`;
+        });
+
+        // Interactive Elements Enhancement
+        document.querySelectorAll('.tech-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.style.transform = 'scale(1.15) rotate(5deg)';
+                this.style.background = 'var(--accent-color)';
+                this.style.color = 'white';
+                
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                    this.style.background = '';
+                    this.style.color = '';
+                }, 400);
+            });
+        });
+
+        // Enhanced CV Download
+        document.getElementById('downloadCV').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const cvContent = `DANIEL ENGLISH-BROWN
+Lead Web Developer & Theoretical Physicist
+
+CONTACT INFORMATION
+Email: danielenglish.zim13@gmail.com
+LinkedIn: https://www.linkedin.com/in/daniel-english-brown/
+GitHub: https://github.com/daniel-english-brown
+Phone: +44 7752 677301
+
+CURRENT ROLE
+Lead Web Developer at Expendid (September 2025 - Present)
+- Leading end-to-end development of AI-powered finance management platform
+- Architecting scalable web solutions for freelancer financial tools
+- Implementing responsive UI/UX with modern design systems
+
+EDUCATION
+MSc Theoretical Physics, King's College London (2025-2026)
+BSc (Hons) Theoretical Physics, King's College London (2022-2025)
+
+TECHNICAL SKILLS
+• Programming: Python, JavaScript, HTML/CSS, MATLAB
+• Web Development: Flask, React, Node.js, Responsive Design
+• Quantitative Finance: Black-Scholes, Portfolio Optimization, Risk Analysis
+• Computational Physics: FDTD Simulation, Numerical Analysis
+• Languages: English (Native), Chinese (C1), French (B2)
+
+KEY ACHIEVEMENTS
+• SAT Score: 1510/1600 (99th percentile)
+• HSK Level 5: 179/300 (Chinese proficiency)
+• First Class project in computational electrodynamics
+• Led team mentorship in UK Girls Robotics Challenge
+
+PREVIOUS EXPERIENCE
+• STEM Outreach Ambassador, King's College London (2024-Present)
+• Quantitative Research Intern, Perbak Capital Partners (2024)
+• Private Tutor, Mathematics & Physics (2024-Present)
+• Student Ambassador, King's College London (2023-Present)
+
+For complete CV and portfolio: https://daniel-english-brown.com
+Generated: ${new Date().toLocaleDateString('en-GB')}`;
+            
+            const blob = new Blob([cvContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Daniel_English-Brown_CV_2025.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            // Enhanced feedback
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-check"></i> Downloaded Successfully!';
+            this.style.background = 'var(--success-color)';
+            this.style.transform = 'scale(1.05)';
+            
+            setTimeout(() => {
+                this.innerHTML = originalText;
+                this.style.background = '';
+                this.style.transform = '';
+            }, 2500);
+        });
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            createPhysicsEquations();
+            
+            // Add typing effect to hero subtitle
+            const subtitle = document.querySelector('.hero-content .subtitle');
+            const originalText = subtitle.textContent;
+            typeWriter(subtitle, originalText, 60);
+            
+            // Animate counters when about section comes into view
+            const aboutSection = document.getElementById('about');
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            statsObserver.observe(aboutSection);
+
+            // Add mouse trail effect
+            let mouseTrail = [];
+            document.addEventListener('mousemove', function(e) {
+                if (mouseTrail.length > 20) mouseTrail.shift();
+                
+                mouseTrail.push({
+                    x: e.clientX,
+                    y: e.clientY,
+                    time: Date.now()
+                });
+            });
+        });
+
+        // Keyboard shortcuts for quick navigation
+        document.addEventListener('keydown', function(e) {
+            const shortcuts = {
+                '1': 'home',
+                '2': 'about', 
+                '3': 'skills',
+                '4': 'projects',
+                '5': 'testimonials',
+                '6': 'contact'
+            };
+            
+            if (shortcuts[e.key] && !e.ctrlKey && !e.altKey) {
+                e.preventDefault();
+                document.getElementById(shortcuts[e.key]).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+            
+            // Toggle theme with 'T' key
+            if (e.key.toLowerCase() === 't' && e.ctrlKey) {
+                e.preventDefault();
+                themeToggle.click();
+            }
+        });
+        
+    </script>
+</body>
+</html>-description">
+                        Leading development of an AI-powered finance management platform for freelancers, featuring responsive design, real-time analytics, and comprehensive backend architecture.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">AI Integration</span>
+                        <span class="tech-tag">Fintech</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">FDTD Electromagnetic Simulation</div>
+                    <div class="project-type">Computational Physics • First Class</div>
+                </div>
+                <div class="project-content">
+                    <p class="project
