@@ -1664,7 +1664,7 @@
                     <i class="fab fa-researchgate"></i>
                 </a> -->
             </div>
-            <p>&copy; 2025 Daniel English‑Brown. Built with passion for physics and code.</p>
+            <p>&copy; <span id="currentYear"></span> Daniel English‑Brown. Built with passion for physics and code.</p>
         </div>
     </footer>
 
@@ -2241,6 +2241,9 @@
                 window.requestAnimationFrame(step);
             });
         }
+
+        // Set Current Year for the Copyright
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
