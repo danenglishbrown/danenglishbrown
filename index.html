@@ -150,15 +150,27 @@
             align-items: center;
             padding: 0 2rem;
         }
-
+        
         .logo {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            cursor: pointer;
-            transition: all 0.3s ease;
+          display: inline-flex;
+          align-items: center;
+          gap: .5rem;
         }
+        
+        .logo-img {
+          height: 34px;               /* adjust to suit your navbar */
+          width: auto;
+          image-rendering: pixelated;  /* crisp 8-bit look */
+          image-rendering: crisp-edges;
+          -ms-interpolation-mode: nearest-neighbor;
+        }
+        
+        /* Default (light) shows light logo, dark logo hidden */
+        .logo-dark { display: none; }
+        
+        /* When your JS toggles data-theme, flip them */
+        [data-theme="dark"] .logo-light { display: none; }
+        [data-theme="dark"] .logo-dark  { display: inline; }
 
         .logo:hover {
             transform: scale(1.05);
@@ -1330,7 +1342,10 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <div class="logo">D.E-B</div>
+            <a class="logo" href="#home" aria-label="Daniel English-Brown home">
+              <img class="logo-img logo-light" src="static/deb-logo-light.png" alt="D.E-B logo">
+              <img class="logo-img logo-dark"  src="static/deb-logo-dark.png"  alt="" aria-hidden="true">
+            </a>
             <button class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
