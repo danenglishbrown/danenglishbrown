@@ -856,6 +856,10 @@
             min-width: 200px;
         }
 
+        .contact-item-email {
+            z-index: 100;
+        }
+
         .contact-item:hover {
             color: var(--accent-hover);
             transform: translateY(-5px);
@@ -1327,6 +1331,83 @@
                 max-height: none;
             }
         }
+
+        /* Email dropdown styles */
+        .email-options {
+            position: relative;
+        }
+
+        .email-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 1rem;
+            box-shadow: var(--card-shadow);
+            z-index: 10000; /* Increased from 1000 to 1500 */
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            min-width: 220px;
+            margin-top: 10px;
+        }
+
+        .email-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(5px);
+        }
+
+        .email-option {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            color: var(--primary-text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .email-option:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .email-option i {
+            font-size: 1.2rem;
+            min-width: 20px;
+        }
+
+        /* Copy notification */
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            z-index: 10000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            box-shadow: var(--card-shadow);
+        }
+
+        .copy-notification.show {
+            transform: translateX(0);
+        }
     </style>
 </head>
 <body data-theme="dark">
@@ -1646,7 +1727,7 @@
             <p>Interested in collaboration, web development projects, PhD opportunities, or quantitative finance roles? Let's discuss how we can work together.</p>
 
             <div class="contact-info">
-                <div class="contact-item email-options" id="emailContact">
+                <div class="contact-item contact-item-email email-options" id="emailContact">
                     <i class="fas fa-envelope"></i>
                     <span>Email Me</span>
                     <div class="email-dropdown" id="emailDropdown">
@@ -2133,20 +2214,6 @@
                     readMoreBtn.style.transform = 'scale(1)';
                 });
             }
-                
-                // Add click animation to button
-                readMoreBtn.addEventListener('mousedown', () => {
-                    readMoreBtn.style.transform = 'scale(0.9)';
-                });
-                
-                readMoreBtn.addEventListener('mouseup', () => {
-                    readMoreBtn.style.transform = 'scale(1)';
-                });
-                
-                readMoreBtn.addEventListener('mouseleave', () => {
-                    readMoreBtn.style.transform = 'scale(1)';
-                });
-            }
 
             // CV Download functionality
             const downloadCV = document.getElementById('downloadCV');
@@ -2288,6 +2355,109 @@
                 }
                 window.requestAnimationFrame(step);
             });
+        }
+
+        // Email options dropdown functionality
+        const emailContact = document.getElementById('emailContact');
+        const emailDropdown = document.getElementById('emailDropdown');
+        const copyEmailBtn = document.getElementById('copyEmail');
+
+        if (emailContact && emailDropdown) {
+            // Toggle dropdown
+            emailContact.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                emailDropdown.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!emailContact.contains(e.target)) {
+                    emailDropdown.classList.remove('show');
+                }
+            });
+
+            // Copy email functionality
+            if (copyEmailBtn) {
+                copyEmailBtn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const email = 'danielenglish.zim13@gmail.com';
+                    
+                    try {
+                        await navigator.clipboard.writeText(email);
+                        showCopyNotification('Email copied to clipboard!');
+                    } catch (err) {
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = email;
+                        textArea.style.position = 'fixed';
+                        textArea.style.left = '-999999px';
+                        textArea.style.top = '-999999px';
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        
+                        try {
+                            document.execCommand('copy');
+                            showCopyNotification('Email copied to clipboard!');
+                        } catch (err) {
+                            console.error('Failed to copy email:', err);
+                            showCopyNotification('Failed to copy email', 'error');
+                        }
+                        
+                        document.body.removeChild(textArea);
+                    }
+                    
+                    emailDropdown.classList.remove('show');
+                });
+            }
+
+            // Prevent dropdown options from closing the dropdown when clicked
+            const emailOptions = emailDropdown.querySelectorAll('.email-option');
+            emailOptions.forEach(option => {
+                if (option !== copyEmailBtn) {
+                    option.addEventListener('click', () => {
+                        emailDropdown.classList.remove('show');
+                    });
+                }
+            });
+        }
+
+        // Function to show copy notification
+        function showCopyNotification(message, type = 'success') {
+            // Remove existing notification if any
+            const existingNotification = document.querySelector('.copy-notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            const notification = document.createElement('div');
+            notification.className = 'copy-notification';
+            notification.innerHTML = `<i class="fas fa-check"></i> ${message}`;
+            
+            if (type === 'error') {
+                notification.style.background = 'var(--warning-color)';
+                notification.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
+            }
+
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 3000);
         }
 
         // Set Current Year for the Copyright
