@@ -1646,10 +1646,21 @@
             <p>Interested in collaboration, web development projects, PhD opportunities, or quantitative finance roles? Let's discuss how we can work together.</p>
 
             <div class="contact-info">
-                <a href="mailto:danielenglish.zim13@gmail.com" class="contact-item">
+                <div class="contact-item email-options" id="emailContact">
                     <i class="fas fa-envelope"></i>
                     <span>Email Me</span>
-                </a>
+                    <div class="email-dropdown" id="emailDropdown">
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=danielenglish.zim13@gmail.com&su=Contact%20from%20Portfolio" target="_blank" class="email-option">
+                            <i class="fab fa-google"></i> Gmail
+                        </a>
+                        <a href="mailto:danielenglish.zim13@gmail.com" class="email-option">
+                            <i class="fas fa-envelope"></i> Default Email App
+                        </a>
+                        <button class="email-option copy-email" id="copyEmail">
+                            <i class="fas fa-copy"></i> Copy Email Address
+                        </button>
+                    </div>
+                </div>
                 <a href="https://www.linkedin.com/in/daniel-english-brown/" class="contact-item" target="_blank">
                     <i class="fab fa-linkedin"></i>
                     <span>LinkedIn</span>
@@ -2048,6 +2059,8 @@
             const readMoreBtn = document.getElementById('readMoreBtn');
             const aboutText = document.getElementById('aboutText');
             if (readMoreBtn && aboutText) {
+                let isExpanded = false;
+                
                 // Function to check if read more is needed
                 const checkReadMoreNeeded = () => {
                     // Temporarily remove collapsed class to measure full height
@@ -2075,33 +2088,51 @@
                 window.addEventListener('resize', checkReadMoreNeeded);
                 
                 // Read more/less functionality
-                readMoreBtn.addEventListener('click', () => {
-                    aboutText.classList.toggle('collapsed');
+                readMoreBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                     
-                    // Update button text and icon with smooth animation
-                    if (aboutText.classList.contains('collapsed')) {
-                        readMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Read More';
-                        readMoreBtn.style.transform = 'scale(0.95)';
-                        setTimeout(() => {
-                            readMoreBtn.style.transform = 'scale(1)';
-                        }, 150);
-                    } else {
+                    isExpanded = !isExpanded;
+                    
+                    if (isExpanded) {
+                        aboutText.classList.remove('collapsed');
                         readMoreBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Read Less';
-                        readMoreBtn.style.transform = 'scale(0.95)';
-                        setTimeout(() => {
-                            readMoreBtn.style.transform = 'scale(1)';
-                        }, 150);
+                    } else {
+                        aboutText.classList.add('collapsed');
+                        readMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Read More';
                     }
+                    
+                    // Button animation
+                    readMoreBtn.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        readMoreBtn.style.transform = 'scale(1)';
+                    }, 150);
                     
                     // Smooth scroll to keep button in view when expanding
-                    if (!aboutText.classList.contains('collapsed')) {
-                        readMoreBtn.scrollIntoView({ 
-                            behavior: 'smooth', 
-                            block: 'nearest',
-                            inline: 'nearest'
-                        });
+                    if (isExpanded) {
+                        setTimeout(() => {
+                            readMoreBtn.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'nearest',
+                                inline: 'nearest'
+                            });
+                        }, 100);
                     }
                 });
+                
+                // Add click animation to button
+                readMoreBtn.addEventListener('mousedown', () => {
+                    readMoreBtn.style.transform = 'scale(0.9)';
+                });
+                
+                readMoreBtn.addEventListener('mouseup', () => {
+                    readMoreBtn.style.transform = 'scale(1)';
+                });
+                
+                readMoreBtn.addEventListener('mouseleave', () => {
+                    readMoreBtn.style.transform = 'scale(1)';
+                });
+            }
                 
                 // Add click animation to button
                 readMoreBtn.addEventListener('mousedown', () => {
