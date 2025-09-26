@@ -310,6 +310,7 @@
             background: var(--gradient-2);
             color: white;
             box-shadow: var(--card-shadow);
+            z-index: 0;
         }
 
         .btn-primary:hover {
@@ -1335,6 +1336,7 @@
         /* Email dropdown styles */
         .email-options {
             position: relative;
+            z-index: 1000;
         }
 
         .email-dropdown {
@@ -1408,6 +1410,118 @@
         .copy-notification.show {
             transform: translateX(0);
         }
+
+        /* Project Links */
+        /* Project Links - Simple and Clean */
+.project-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.2rem;
+    background: var(--accent-bg);
+    color: var(--accent-color);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.project-link:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.current-site-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.2rem;
+    background: var(--success-color);
+    color: white;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.coming-soon {
+    background: var(--warning-color);
+    color: white;
+}
+
+/* Simple Under Construction Overlay */
+.under-construction {
+    position: relative;
+}
+
+.construction-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 31, 53, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    opacity: 0;
+    transition: all 0.3s ease;
+    border-radius: 15px;
+}
+
+.under-construction:hover .construction-overlay {
+    opacity: 1;
+}
+
+.construction-content {
+    text-align: center;
+    color: white;
+    padding: 2rem;
+}
+
+.construction-content i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--warning-color);
+}
+
+.construction-content h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+/* Keep original project card animations */
+.project-card {
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.under-construction:hover {
+    transform: translateY(-5px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .project-links {
+        flex-direction: column;
+    }
+    
+    .construction-overlay {
+        opacity: 0.9;
+    }
+}
     </style>
 </head>
 <body data-theme="dark">
@@ -1557,25 +1671,89 @@
     <section id="projects" class="fade-in">
         <h2 class="section-title">Featured Projects</h2>
         <div class="projects-grid">
+            <!-- Personal Portfolio Website -->
             <div class="project-card">
                 <div class="project-header">
-                    <div class="project-title">Expendid Finance Platform</div>
-                    <div class="project-type">Lead Web Developer • Current Role</div>
+                    <div class="project-title">Personal Portfolio Website</div>
+                    <div class="project-type">Full‑stack • Current</div>
                 </div>
                 <div class="project-content">
                     <p class="project-description">
-                        Leading development of an AI‑powered finance management platform for freelancers, featuring responsive design, real‑time analytics, and comprehensive backend architecture.
+                        A responsive, interactive portfolio showcasing my skills in web development, physics, and quantitative finance. Features dark/light mode, animated elements, and mobile-first design.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Responsive Design</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://danielenglish.me" class="project-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Visit Site
+                        </a>
+                        <span class="current-site-indicator">
+                            <i class="fas fa-map-marker-alt"></i> You are here
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Movie Ranking Web App -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">MovieRank Pro</div>
+                    <div class="project-type">Full‑stack • Python Flask</div>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        A full-stack web application for managing and ranking movies. Features CRUD operations, SQL database, responsive design, and user authentication. Built as part of Angela Yu's Python Bootcamp.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">SQLite</span>
+                        <span class="tech-tag">Bootstrap</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://movie-ranking-9vhm.onrender.com" class="project-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expendid Finance Platform (Under Construction) -->
+            <div class="project-card under-construction">
+                <div class="construction-overlay">
+                    <div class="construction-content">
+                        <i class="fas fa-hard-hat"></i>
+                        <h3>Under Construction</h3>
+                        <p>Launching Soon</p>
+                    </div>
+                </div>
+                <div class="project-header">
+                    <div class="project-title">Expendid Finance Platform</div>
+                    <div class="project-type">Lead Web Developer • In Progress</div>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        AI‑powered finance management platform for freelancers featuring real‑time analytics, automated expense tracking, and intelligent financial insights. Currently in active development.
                     </p>
                     <div class="project-tech">
                         <span class="tech-tag">Flask</span>
                         <span class="tech-tag">JavaScript</span>
                         <span class="tech-tag">Python</span>
                         <span class="tech-tag">AI Integration</span>
-                        <span class="tech-tag">Fintech</span>
+                    </div>
+                    <div class="project-links">
+                        <span class="project-link coming-soon">
+                            <i class="fas fa-clock"></i> Coming Soon
+                        </span>
                     </div>
                 </div>
             </div>
 
+            <!-- FDTD Electromagnetic Simulation -->
             <div class="project-card">
                 <div class="project-header">
                     <div class="project-title">FDTD Electromagnetic Simulation</div>
@@ -1583,7 +1761,7 @@
                 </div>
                 <div class="project-content">
                     <p class="project-description">
-                        Developed a comprehensive Finite Difference Time Domain software for computational electrodynamics, featuring planar‑graded index lenses, photonic crystals, and invisibility cloak simulations.
+                        Comprehensive Finite Difference Time Domain software for computational electrodynamics. Simulates planar‑graded index lenses, photonic crystals, and invisibility cloaks with advanced numerical analysis.
                     </p>
                     <div class="project-tech">
                         <span class="tech-tag">Python</span>
@@ -1591,9 +1769,15 @@
                         <span class="tech-tag">Matplotlib</span>
                         <span class="tech-tag">Numerical Analysis</span>
                     </div>
+                    <div class="project-links">
+                        <a href="https://www.linkedin.com/feed/update/urn:li:activity:7374137857659269120/" class="project-link" target="_blank">
+                            <i class="fab fa-linkedin"></i> View on LinkedIn
+                        </a>
+                    </div>
                 </div>
             </div>
 
+            <!-- Quantitative Trading Models -->
             <div class="project-card">
                 <div class="project-header">
                     <div class="project-title">Quantitative Trading Models</div>
@@ -1601,7 +1785,7 @@
                 </div>
                 <div class="project-content">
                     <p class="project-description">
-                        Implemented Black‑Scholes and binomial option pricing models, developed market‑neutral portfolios using convex optimization, and analyzed non‑normal return distributions.
+                        Implemented Black‑Scholes and binomial option pricing models, developed market‑neutral portfolios using convex optimization, and analyzed non‑normal return distributions for hedge fund strategies.
                     </p>
                     <div class="project-tech">
                         <span class="tech-tag">Python</span>
@@ -1609,9 +1793,15 @@
                         <span class="tech-tag">Financial Modeling</span>
                         <span class="tech-tag">Risk Analysis</span>
                     </div>
+                    <div class="project-links">
+                        <span class="project-link">
+                            <i class="fas fa-lock"></i> Proprietary Code
+                        </span>
+                    </div>
                 </div>
             </div>
 
+            <!-- Girls Robotics Challenge -->
             <div class="project-card">
                 <div class="project-header">
                     <div class="project-title">Girls Robotics Challenge</div>
@@ -1619,13 +1809,18 @@
                 </div>
                 <div class="project-content">
                     <p class="project-description">
-                        Led and mentored a team of eight students in the UK's inaugural all‑girls national robotics competition, guiding them through design, programming, and project management.
+                        Led and mentored a team of eight students in the UK's inaugural all‑girls national robotics competition. Guided through design, programming, and project management for competitive robotics.
                     </p>
                     <div class="project-tech">
                         <span class="tech-tag">BBC micro:bit</span>
                         <span class="tech-tag">Robotics</span>
                         <span class="tech-tag">Team Leadership</span>
                         <span class="tech-tag">STEM Education</span>
+                    </div>
+                    <div class="project-links">
+                        <span class="project-link">
+                            <i class="fas fa-certificate"></i> Completed
+                        </span>
                     </div>
                 </div>
             </div>
@@ -1727,16 +1922,16 @@
             <p>Interested in collaboration, web development projects, PhD opportunities, or quantitative finance roles? Let's discuss how we can work together.</p>
 
             <div class="contact-info">
-                <div class="contact-item contact-item-email email-options" id="emailContact">
+                <div class="contact-item email-options" id="emailContact">
                     <i class="fas fa-envelope"></i>
                     <span>Email Me</span>
                     <div class="email-dropdown" id="emailDropdown">
-                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=danielenglish.zim13@gmail.com&su=Contact%20from%20Portfolio" target="_blank" class="email-option">
-                            <i class="fab fa-google"></i> Gmail
+                        <a href="#" class="email-option" id="gmailOption">
+                            <i class="fab fa-google"></i> Open in Gmail
                         </a>
-                        <a href="mailto:danielenglish.zim13@gmail.com" class="email-option">
+                        <button class="email-option" id="defaultEmailOption">
                             <i class="fas fa-envelope"></i> Default Email App
-                        </a>
+                        </button>
                         <button class="email-option copy-email" id="copyEmail">
                             <i class="fas fa-copy"></i> Copy Email Address
                         </button>
@@ -2361,6 +2556,7 @@
         const emailContact = document.getElementById('emailContact');
         const emailDropdown = document.getElementById('emailDropdown');
         const copyEmailBtn = document.getElementById('copyEmail');
+        const gmailOption = document.getElementById('gmailOption');
 
         if (emailContact && emailDropdown) {
             // Toggle dropdown
@@ -2376,6 +2572,45 @@
                     emailDropdown.classList.remove('show');
                 }
             });
+
+            // Smart Gmail functionality
+            if (gmailOption) {
+                gmailOption.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const email = 'danielenglish.zim13@gmail.com';
+                    const subject = 'Contact from Portfolio';
+                    
+                    // Try to detect if we're on mobile
+                    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                    
+                    if (isMobile) {
+                        // On mobile, try Gmail app first, then fallback
+                        const gmailAppUrl = `googlegmail://co?to=${email}&subject=${encodeURIComponent(subject)}`;
+                        const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}`;
+                        
+                        // Create a hidden iframe to test if Gmail app is available
+                        const iframe = document.createElement('iframe');
+                        iframe.style.display = 'none';
+                        iframe.src = gmailAppUrl;
+                        document.body.appendChild(iframe);
+                        
+                        // Set a timeout to fallback to web version
+                        setTimeout(() => {
+                            document.body.removeChild(iframe);
+                            window.open(gmailWebUrl, '_blank');
+                        }, 500);
+                        
+                    } else {
+                        // On desktop, go straight to Gmail web
+                        const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}`;
+                        window.open(gmailWebUrl, '_blank');
+                    }
+                    
+                    emailDropdown.classList.remove('show');
+                });
+            }
 
             // Copy email functionality
             if (copyEmailBtn) {
@@ -2414,11 +2649,12 @@
                 });
             }
 
-            // Prevent dropdown options from closing the dropdown when clicked
+            // Handle other email options
             const emailOptions = emailDropdown.querySelectorAll('.email-option');
             emailOptions.forEach(option => {
-                if (option !== copyEmailBtn) {
-                    option.addEventListener('click', () => {
+                if (option !== copyEmailBtn && option !== gmailOption) {
+                    option.addEventListener('click', (e) => {
+                        // Let the default mailto: behavior work
                         emailDropdown.classList.remove('show');
                     });
                 }
@@ -2458,6 +2694,63 @@
                     }
                 }, 300);
             }, 3000);
+        }
+
+        const defaultEmailOption = document.getElementById('defaultEmailOption');
+        if (defaultEmailOption) {
+            defaultEmailOption.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const email = 'danielenglish.zim13@gmail.com';
+                const subject = 'Contact from Portfolio';
+                const body = 'Hello Daniel,\n\nI came across your portfolio and would like to get in touch.';
+                
+                // Create mailto link
+                const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                
+                // Open default email client
+                window.location.href = mailtoLink;
+                
+                closeEmailDropdown();
+            });
+        }
+
+        if (gmailOption) {
+            gmailOption.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const email = 'danielenglish.zim13@gmail.com';
+                const subject = 'Contact from Portfolio';
+                const body = 'Hello Daniel,\n\nI came across your portfolio and would like to get in touch.';
+                
+                // Enhanced mobile detection
+                const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                
+                if (isMobile) {
+                    // Try Gmail app first, then fallback to mailto:
+                    const gmailAppUrl = `googlegmail://co?to=${email}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    
+                    // Try to open Gmail app
+                    window.location.href = gmailAppUrl;
+                    
+                    // Fallback to web version if app isn't available
+                    setTimeout(() => {
+                        if (!document.hidden) {
+                            window.open(gmailWebUrl, '_blank');
+                        }
+                    }, 500);
+                    
+                } else {
+                    // On desktop, use Gmail web
+                    const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    window.open(gmailWebUrl, '_blank');
+                }
+                
+                closeEmailDropdown();
+            });
         }
 
         // Set Current Year for the Copyright
