@@ -1557,15 +1557,44 @@
             transform: translateY(-5px);
         }
 
-        /* Responsive adjustments */
+        /* Mobile touch improvements */
         @media (max-width: 768px) {
-            .project-links {
-                flex-direction: column;
+            .under-construction {
+                -webkit-tap-highlight-color: transparent;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                user-select: none;
             }
             
             .construction-overlay {
-                opacity: 0.9;
+                -webkit-tap-highlight-color: transparent;
             }
+            
+            /* Improve touch target size */
+            .project-card {
+                min-height: 60px; /* Better touch target */
+            }
+        }
+
+        /* Prevent any auto-collapse behavior */
+        .about-text {
+            transition: max-height 0.3s ease !important;
+        }
+
+        /* Ensure the collapsed state is only controlled by the button */
+        .about-text.collapsed {
+            max-height: 120px !important;
+            overflow: hidden !important;
+        }
+
+        .about-text:not(.collapsed) {
+            max-height: none !important;
+            overflow: visible !important;
+        }
+
+        /* Remove any fade effects that might interfere */
+        .about-text-fade {
+            display: none !important;
         }
     </style>
 </head>
@@ -2376,85 +2405,121 @@
                 lastScrollY = window.scrollY;
             });
 
-            // About section read more functionality
-            const readMoreBtn = document.getElementById('readMoreBtn');
-            const aboutText = document.getElementById('aboutText');
-            if (readMoreBtn && aboutText) {
-                let isExpanded = false;
+            // About section read more functionality - Persistent state version
+            document.addEventListener('DOMContentLoaded', function() {
+                const readMoreBtn = document.getElementById('readMoreBtn');
+                const aboutText = document.getElementById('aboutText');
                 
-                // Function to check if read more is needed
-                const checkReadMoreNeeded = () => {
-                    // Temporarily remove collapsed class to measure full height
-                    aboutText.classList.remove('collapsed');
-                    const fullHeight = aboutText.scrollHeight;
-                    const lineHeight = parseInt(getComputedStyle(aboutText).lineHeight);
-                    const maxCollapsedHeight = 6 * lineHeight; // Show about 6 lines
+                if (readMoreBtn && aboutText) {
+                    // Check if state is saved in localStorage
+                    const savedState = localStorage.getItem('aboutExpanded');
+                    let isExpanded = savedState === 'true';
                     
-                    // Re-add collapsed class
-                    aboutText.classList.add('collapsed');
-                    
-                    // Only show button if content is taller than collapsed height
-                    if (fullHeight > maxCollapsedHeight) {
-                        readMoreBtn.style.display = 'inline-flex';
-                    } else {
-                        readMoreBtn.style.display = 'none';
-                        aboutText.classList.remove('collapsed'); // Show full content
-                    }
-                };
-                
-                // Initialize on load
-                setTimeout(checkReadMoreNeeded, 100);
-                
-                // Also check on window resize
-                window.addEventListener('resize', checkReadMoreNeeded);
-                
-                // Read more/less functionality
-                readMoreBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    isExpanded = !isExpanded;
-                    
-                    if (isExpanded) {
+                    // Initialize based on saved state or default to collapsed
+                    function initializeAboutSection() {
+                        // Temporarily remove collapsed class to measure full height
                         aboutText.classList.remove('collapsed');
-                        readMoreBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Read Less';
-                    } else {
-                        aboutText.classList.add('collapsed');
-                        readMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Read More';
+                        const fullHeight = aboutText.scrollHeight;
+                        const lineHeight = parseInt(getComputedStyle(aboutText).lineHeight);
+                        const maxCollapsedHeight = 6 * lineHeight;
+                        
+                        // Only show button if content is taller than collapsed height
+                        if (fullHeight > maxCollapsedHeight) {
+                            readMoreBtn.style.display = 'inline-flex';
+                            
+                            // Apply saved state or default to collapsed
+                            if (isExpanded) {
+                                aboutText.classList.remove('collapsed');
+                                readMoreBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Read Less';
+                            } else {
+                                aboutText.classList.add('collapsed');
+                                readMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Read More';
+                            }
+                        } else {
+                            readMoreBtn.style.display = 'none';
+                            aboutText.classList.remove('collapsed');
+                        }
                     }
                     
-                    // Button animation
-                    readMoreBtn.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
+                    // Initialize on load
+                    setTimeout(initializeAboutSection, 100);
+                    
+                    // Re-initialize on window resize
+                    window.addEventListener('resize', initializeAboutSection);
+                    
+                    // Read more/less functionality
+                    readMoreBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        isExpanded = !isExpanded;
+                        
+                        // Save state to localStorage
+                        localStorage.setItem('aboutExpanded', isExpanded.toString());
+                        
+                        if (isExpanded) {
+                            aboutText.classList.remove('collapsed');
+                            readMoreBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Read Less';
+                        } else {
+                            aboutText.classList.add('collapsed');
+                            readMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Read More';
+                        }
+                        
+                        // Button animation
+                        readMoreBtn.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            readMoreBtn.style.transform = 'scale(1)';
+                        }, 150);
+                    });
+                    
+                    // Remove any event listeners that might be causing auto-collapse
+                    aboutText.addEventListener('scroll', (e) => {
+                        e.stopPropagation();
+                    });
+                    
+                    // Prevent any Intersection Observer from affecting the about section
+                    const aboutSection = document.getElementById('about');
+                    if (aboutSection) {
+                        // Remove any existing intersection observers
+                        aboutSection.style.animationPlayState = 'running';
+                        
+                        // Add a mutation observer to prevent auto-collapse
+                        const observer = new MutationObserver(function(mutations) {
+                            mutations.forEach(function(mutation) {
+                                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                                    // If someone tries to add collapsed class programmatically, remove it if expanded
+                                    if (isExpanded && aboutText.classList.contains('collapsed')) {
+                                        aboutText.classList.remove('collapsed');
+                                    }
+                                }
+                            });
+                        });
+                        
+                        observer.observe(aboutText, {
+                            attributes: true,
+                            attributeFilter: ['class']
+                        });
+                    }
+                    
+                    // Add click animation to button
+                    readMoreBtn.addEventListener('mousedown', () => {
+                        readMoreBtn.style.transform = 'scale(0.9)';
+                    });
+                    
+                    readMoreBtn.addEventListener('mouseup', () => {
                         readMoreBtn.style.transform = 'scale(1)';
-                    }, 150);
-                });
-                
-                // Prevent auto-collapse by removing any scroll listeners that might be causing it
-                aboutText.addEventListener('scroll', (e) => {
-                    e.stopPropagation();
-                });
-                
-                // Add click animation to button
-                readMoreBtn.addEventListener('mousedown', () => {
-                    readMoreBtn.style.transform = 'scale(0.9)';
-                });
-                
-                readMoreBtn.addEventListener('mouseup', () => {
-                    readMoreBtn.style.transform = 'scale(1)';
-                });
-                
-                readMoreBtn.addEventListener('mouseleave', () => {
-                    readMoreBtn.style.transform = 'scale(1)';
-                });
-                
-                // Remove any Intersection Observer that might be causing auto-collapse
-                // Add this to prevent any unwanted observers from affecting the about section
-                const aboutSection = document.getElementById('about');
-                if (aboutSection) {
-                    aboutSection.style.animationPlayState = 'running'; // Force it to stay visible
+                    });
+                    
+                    readMoreBtn.addEventListener('mouseleave', () => {
+                        readMoreBtn.style.transform = 'scale(1)';
+                    });
+                    
+                    readMoreBtn.addEventListener('touchend', (e) => {
+                        e.preventDefault();
+                        readMoreBtn.style.transform = 'scale(1)';
+                    });
                 }
-            }
+            });
 
             // CV Download functionality
             const downloadCV = document.getElementById('downloadCV');
@@ -2799,27 +2864,48 @@
             });
         }
 
-        // Under construction overlay toggle
+        // Under construction overlay toggle - Fixed for iPhone
         document.addEventListener('DOMContentLoaded', function() {
             const constructionCards = document.querySelectorAll('.under-construction');
             
             constructionCards.forEach(card => {
                 const overlay = card.querySelector('.construction-overlay');
                 
-                card.addEventListener('click', function(e) {
+                // Use both click and touch events for mobile compatibility
+                card.addEventListener('click', handleConstructionClick);
+                card.addEventListener('touchend', handleConstructionClick);
+                
+                function handleConstructionClick(e) {
+                    // Prevent default for touch events
+                    if (e.type === 'touchend') {
+                        e.preventDefault();
+                    }
+                    
                     // Don't trigger if clicking on links inside the card
                     if (e.target.closest('.project-link') || e.target.closest('.project-links')) {
                         return;
                     }
                     
                     overlay.classList.toggle('active');
-                });
+                }
                 
                 // Close overlay when clicking the overlay itself
-                overlay.addEventListener('click', function(e) {
+                overlay.addEventListener('click', handleOverlayClick);
+                overlay.addEventListener('touchend', handleOverlayClick);
+                
+                function handleOverlayClick(e) {
+                    if (e.type === 'touchend') {
+                        e.preventDefault();
+                    }
                     e.stopPropagation(); // Prevent card click from triggering
                     overlay.classList.remove('active');
-                });
+                }
+                
+                // Add touch-specific styles for mobile
+                if ('ontouchstart' in window) {
+                    card.style.cursor = 'pointer';
+                    card.style.webkitTapHighlightColor = 'transparent';
+                }
             });
         });
 
