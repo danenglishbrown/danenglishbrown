@@ -1412,116 +1412,161 @@
         }
 
         /* Project Links */
-        /* Project Links - Simple and Clean */
-.project-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
-}
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
 
-.project-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.7rem 1.2rem;
-    background: var(--accent-bg);
-    color: var(--accent-color);
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-}
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center; /* Center content */
+            gap: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            background: var(--accent-bg);
+            color: var(--accent-color);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            text-align: center; /* Center text */
+            flex: 1; /* Make buttons equal width */
+            min-width: 120px; /* Minimum width for better appearance */
+        }
 
-.project-link:hover {
-    background: var(--accent-color);
-    color: white;
-    transform: translateY(-2px);
-}
+        .project-link:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
 
-.current-site-indicator {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.7rem 1.2rem;
-    background: var(--success-color);
-    color: white;
-    border-radius: 8px;
-    font-weight: 500;
-    font-size: 0.9rem;
-}
+        /* Mobile specific styles */
+        @media (max-width: 768px) {
+            .project-links {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .project-link {
+                width: 100%; /* Full width on mobile */
+                justify-content: center;
+                text-align: center;
+                padding: 0.9rem 1.5rem; /* Slightly larger for mobile */
+            }
+            
+            .current-site-indicator,
+            .coming-soon {
+                width: 100%;
+                justify-content: center;
+                text-align: center;
+            }
+        }
 
-.coming-soon {
-    background: var(--warning-color);
-    color: white;
-}
+        .current-site-indicator {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            background: var(--success-color);
+            color: white;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-align: center;
+        }
 
-/* Simple Under Construction Overlay */
-.under-construction {
-    position: relative;
-}
+        .coming-soon {
+            background: var(--warning-color);
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-align: center;
+        }
 
-.construction-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(26, 31, 53, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    opacity: 0;
-    transition: all 0.3s ease;
-    border-radius: 15px;
-}
+        /* Simple Under Construction Overlay */
+        .under-construction {
+            position: relative;
+        }
 
-.under-construction:hover .construction-overlay {
-    opacity: 1;
-}
+        .construction-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 31, 53, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            cursor: pointer;
+        }
 
-.construction-content {
-    text-align: center;
-    color: white;
-    padding: 2rem;
-}
+        .construction-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
 
-.construction-content i {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: var(--warning-color);
-}
+        .construction-content {
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
 
-.construction-content h3 {
-    margin-bottom: 0.5rem;
-    font-size: 1.3rem;
-}
+        .construction-content i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--warning-color);
+        }
 
-/* Keep original project card animations */
-.project-card {
-    transition: all 0.3s ease;
-}
+        .construction-content h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
 
-.project-card:hover {
-    transform: translateY(-5px);
-}
+        /* Remove the hover effect */
+        .under-construction:hover .construction-overlay {
+            opacity: 0;
+            visibility: hidden;
+        }
 
-.under-construction:hover {
-    transform: translateY(-5px);
-}
+        /* Keep original project card animations */
+        .project-card {
+            transition: all 0.3s ease;
+        }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .project-links {
-        flex-direction: column;
-    }
-    
-    .construction-overlay {
-        opacity: 0.9;
-    }
-}
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .under-construction:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .project-links {
+                flex-direction: column;
+            }
+            
+            .construction-overlay {
+                opacity: 0.9;
+            }
+        }
     </style>
 </head>
 <body data-theme="dark">
@@ -2383,17 +2428,11 @@
                     setTimeout(() => {
                         readMoreBtn.style.transform = 'scale(1)';
                     }, 150);
-                    
-                    // Smooth scroll to keep button in view when expanding
-                    if (isExpanded) {
-                        setTimeout(() => {
-                            readMoreBtn.scrollIntoView({ 
-                                behavior: 'smooth', 
-                                block: 'nearest',
-                                inline: 'nearest'
-                            });
-                        }, 100);
-                    }
+                });
+                
+                // Prevent auto-collapse by removing any scroll listeners that might be causing it
+                aboutText.addEventListener('scroll', (e) => {
+                    e.stopPropagation();
                 });
                 
                 // Add click animation to button
@@ -2408,6 +2447,13 @@
                 readMoreBtn.addEventListener('mouseleave', () => {
                     readMoreBtn.style.transform = 'scale(1)';
                 });
+                
+                // Remove any Intersection Observer that might be causing auto-collapse
+                // Add this to prevent any unwanted observers from affecting the about section
+                const aboutSection = document.getElementById('about');
+                if (aboutSection) {
+                    aboutSection.style.animationPlayState = 'running'; // Force it to stay visible
+                }
             }
 
             // CV Download functionality
@@ -2752,6 +2798,30 @@
                 closeEmailDropdown();
             });
         }
+
+        // Under construction overlay toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const constructionCards = document.querySelectorAll('.under-construction');
+            
+            constructionCards.forEach(card => {
+                const overlay = card.querySelector('.construction-overlay');
+                
+                card.addEventListener('click', function(e) {
+                    // Don't trigger if clicking on links inside the card
+                    if (e.target.closest('.project-link') || e.target.closest('.project-links')) {
+                        return;
+                    }
+                    
+                    overlay.classList.toggle('active');
+                });
+                
+                // Close overlay when clicking the overlay itself
+                overlay.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent card click from triggering
+                    overlay.classList.remove('active');
+                });
+            });
+        });
 
         // Set Current Year for the Copyright
         document.getElementById('currentYear').textContent = new Date().getFullYear();
