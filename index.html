@@ -16,20 +16,37 @@
          */
 
         :root {
-            --primary-bg: #0a0e1a;
-            --secondary-bg: #1a1f35;
-            --accent-bg: #2d3748;
-            --primary-text: #e2e8f0;
-            --secondary-text: #a0aec0;
-            --accent-color: #6fa9d8;
-            --accent-hover: #3182ce;
-            --success-color: #38bb6f;
-            --warning-color: #ed8936;
-            --border-color: #2d3748;
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #4299e1 0%, #667eea 100%);
-            --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        --primary-bg: #0a0e1a;
+        --secondary-bg: #1a1f35;
+        --accent-bg: #2d3748;
+        --primary-text: #e2e8f0;
+        --secondary-text: #a0aec0;
+
+        /* switched to logo palette */
+        --accent-color: #3991FB;      /* logo blue */
+        --accent-hover: #1A61DB;      /* darker hover from your logo shades */
+
+        --success-color: #38bb6f;
+        --warning-color: #ed8936;
+        --border-color: #2d3748;
+
+        /* optional: make gradients use the same blue family */
+        --gradient-1: linear-gradient(135deg, #3991FB 0%, #1A61DB 100%);
+        --gradient-2: linear-gradient(135deg, #3991FB 0%, #1A61DB 100%);
+
+        --card-shadow: 0 20px 25px -5px rgba(0,0,0,.3), 0 10px 10px -5px rgba(0,0,0,.2);
         }
+
+        /* add this anywhere after your current :root block */
+        :root { --brand-blue: #3991FB; }
+
+        /* put this AFTER the existing .hero-content h1 rule */
+        .hero .hero-content h1 {
+        background: none !important;
+        -webkit-text-fill-color: var(--brand-blue) !important;
+        color: var(--brand-blue) !important; /* fallback */
+        }
+
 
         [data-theme="light"] {
             --primary-bg: #f7fafc;
@@ -1551,7 +1568,7 @@
         <div class="about-content">
             <div class="about-image">
                 <div class="profile-placeholder interactive-hover">
-                    <img src="static/pfp.JPG" class="profile-image" alt="Daniel English‑Brown">
+                    <img src="static/pfp.jpg" class="profile-image" alt="Daniel English‑Brown">
                 </div>
             </div>
             <div class="about-text-wrapper">
