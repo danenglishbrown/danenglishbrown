@@ -1508,6 +1508,53 @@
         .about-text-fade {
             display: none !important;
         }
+
+        /* Subtle caption and spacing */
+.about-caption {
+  margin-top: .75rem;
+  font-size: .9rem;
+  color: var(--secondary-text);
+  text-align: center;
+}
+
+/* Highlights list styling */
+.about-highlights {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: .6rem;
+}
+.about-highlights li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  align-items: start;
+  gap: .6rem;
+  padding: .6rem .8rem;
+  background: var(--secondary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+.about-highlights i {
+  color: var(--accent-color);
+  line-height: 1.2;
+  margin-top: .2rem;
+}
+
+/* CTAs under the paragraph */
+.about-ctas {
+  display: flex;
+  gap: .8rem;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+}
+
+/* Mobile tweaks: add vertical breathing room around the portrait */
+@media (max-width: 768px) {
+  .about-image { padding-top: 32px; padding-bottom: 32px; }
+  .about-ctas { justify-content: center; }
+}
+
     </style>
 </head>
 <body data-theme="dark">
@@ -1563,42 +1610,61 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="fade-in">
-        <h2 class="section-title">About Me</h2>
+    <section id="about" class="fade-in" aria-labelledby="about-title">
+        <h2 class="section-title" id="about-title">About Me</h2>
+
         <div class="about-content">
+            <!-- Image -->
             <div class="about-image">
-                <div class="profile-placeholder interactive-hover">
-                    <img src="static/pfp.jpg" class="profile-image" alt="Daniel English‑Brown">
+            <div class="profile-placeholder interactive-hover" aria-hidden="true">
+                <img src="static/pfp.jpg" class="profile-image" alt="Portrait of Daniel English-Brown">
+            </div>
+            <!-- Optional caption for credibility (remove if you don’t want it) -->
+            <!-- <figcaption class="about-caption">Lead Web Developer @ Expendid • MSc Theoretical Physics (KCL)</figcaption> -->
+            </div>
+
+            <!-- Text -->
+            <div class="about-text-wrapper">
+            <div class="about-text" id="aboutText">
+                <p><strong>Full-stack developer</strong> and <strong>MSc Theoretical Physics</strong> student (King’s College London) with a build-fast, ship-clean mindset. I focus on performance, accessible interfaces and data-driven product decisions.</p>
+
+                <p>Recent work includes leading the web build for <strong>Expendid</strong> (freelancer finance platform): public waitlist with referrals/leaderboard, secure admin tools, and a responsive glass-UI shell in <strong>Flask + vanilla JS</strong>. Before that, I implemented an <strong>FDTD electromagnetic solver</strong> for modelling a ring resonator and did quantitative research at a London hedge fund (portfolio construction & risk).</p>
+
+                <ul class="about-highlights" role="list">
+                <li><i class="fas fa-rocket" aria-hidden="true"></i> Designed & shipped an end-to-end waitlist stack (capture → referral tracking → leaderboard) with clean admin UX.</li>
+                <li><i class="fas fa-tachometer-alt" aria-hidden="true"></i> Performance-first: semantic HTML, CSS architecture, and JS that degrades gracefully; aims for 90+ Lighthouse.</li>
+                <li><i class="fas fa-universal-access" aria-hidden="true"></i> Accessibility baked in: color-contrast tokens, focus states, keyboard flows, ARIA labels.</li>
+                <li><i class="fas fa-flask" aria-hidden="true"></i> Python/Flask back-ends, lightweight APIs, and simple deploys (Render/GitHub Pages) with HTTPS & DNS.</li>
+                </ul>
+
+                <div class="about-ctas">
+                <a href="#projects" class="btn btn-primary"><i class="fas fa-briefcase"></i> View Projects</a>
+                <a href="static/Daniel_English-Brown_CV.pdf" class="btn btn-secondary"><i class="fas fa-download"></i> Download CV</a>
                 </div>
             </div>
-            <div class="about-text-wrapper">
-                <div class="about-text" id="aboutText">
-                    <p>I am a full-stack web developer, theoretical physics master's student with a particular interest in quantum computing and quantitative finance.</p>
-                    <p>My experience spans developing software to model the behaviour of light, quantitative research at a London hedge fund and full-stack web development.</p>
-                    <p>Alongside my MSc in theoretical physics at King's College London, I am the lead web developer at Expendid, a fintech finance tracker for freelancers, where I architected the advanced web application for the launch of the Expendid app.</p>
-                </div>
             </div>
         </div>
 
+        <!-- Stats remain as-is -->
         <div class="stats">
-            <div class="stat-item interactive-hover">
-                <div class="stat-number">1510</div>
-                <div>SAT Score (99th percentile)</div>
+            <div class="stat-item interactive-hover" aria-label="SAT score 1510 (99th percentile)">
+            <div class="stat-number">1510</div>
+            <div>SAT Score (99th percentile)</div>
             </div>
             <div class="stat-item interactive-hover">
-                <div class="stat-number">5+</div>
-                <div>Programming Languages</div>
+            <div class="stat-number">5+</div>
+            <div>Programming Languages</div>
             </div>
             <div class="stat-item interactive-hover">
-                <div class="stat-number">2026</div>
-                <div>MSc Graduation</div>
+            <div class="stat-number">2026</div>
+            <div>MSc Graduation</div>
             </div>
             <div class="stat-item interactive-hover">
-                <div class="stat-number">3</div>
-                <div>Languages (English, French and Chinese)</div>
+            <div class="stat-number">3</div>
+            <div>Languages (English, French, Chinese)</div>
             </div>
         </div>
-    </section>
+        </section>
 
     <!-- Skills Section -->
     <section id="skills" class="fade-in">
@@ -1662,10 +1728,10 @@
                         A responsive, interactive portfolio showcasing my skills in web development, physics, and quantitative finance. Features dark/light mode, animated elements, and mobile-first design.
                     </p>
                     <div class="project-tech">
-                        <span class="tech-tag">Responsive Design</span>
+                        <span class="tech-tag">HTML5</span>
                         <span class="tech-tag">CSS3</span>
                         <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">Responsive Design</span>
                     </div>
                     <div class="project-links">
                         <a href="https://danielenglish.me" class="project-link" target="_blank">
@@ -1717,16 +1783,13 @@
                 </div>
                 <div class="project-content">
                     <p class="project-description">
-AI-powered finance platform for freelancers. Built the
-      waitlist experience (referrals, leaderboard, email capture), plus the initial
-      web app shell (glass UI, gradients, dark mode) using Flask and vanilla JS.
+                        AI‑powered finance management platform for freelancers featuring real‑time analytics, automated expense tracking, and intelligent financial insights. Currently in active development.
                     </p>
                     <div class="project-tech">
                         <span class="tech-tag">Flask</span>
                         <span class="tech-tag">JavaScript</span>
                         <span class="tech-tag">Python</span>
-                        <span class="tech-tag">HTML5</span>
-                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">AI Integration</span>
                     </div>
                     <div class="project-links">
                         <span class="project-link coming-soon">
@@ -1744,13 +1807,13 @@ AI-powered finance platform for freelancers. Built the
                 </div>
                 <div class="project-content">
                     <p class="project-description">
-                        Comprehensive Finite Difference Time Domain software for computational electrodynamics. Simulated a lossless ring resonator and measured the quality factor, free spectral range and resonance conditions with advanced numerical analysis.
+                        Comprehensive Finite Difference Time Domain software for computational electrodynamics. Simulates planar‑graded index lenses, photonic crystals, and invisibility cloaks with advanced numerical analysis.
                     </p>
                     <div class="project-tech">
                         <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Numerical Analysis</span>
-                        <span class="tech-tag">Matplotlib</span>
                         <span class="tech-tag">NumPy</span>
+                        <span class="tech-tag">Matplotlib</span>
+                        <span class="tech-tag">Numerical Analysis</span>
                     </div>
                     <div class="project-links">
                         <a href="https://www.linkedin.com/feed/update/urn:li:activity:7374137857659269120/" class="project-link" target="_blank">
@@ -1926,11 +1989,11 @@ AI-powered finance platform for freelancers. Built the
                 </a>
             </div>
 
-            <div class="cv-download" style="margin-top: 3rem;">
+            <!-- <div class="cv-download" style="margin-top: 3rem;">
                 <a href="#" class="btn btn-primary" id="downloadCV">
                     <i class="fas fa-download"></i> Download CV
                 </a>
-            </div>
+            </div> -->
         </div>
     </section>
 
