@@ -360,32 +360,14 @@
         }
 
         /* About Section */
-        .read-more-container {
-            position: relative;
-        }
-
-        .about-text-wrapper {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-text {
-            font-size: 1.2rem;
-            line-height: 1.7;
-            color: var(--primary-text);
-        }
-
-        .about-text p {
-            margin-bottom: 1.2rem;
-        }
-
-        .about-text p:last-child {
-            margin-bottom: 0;
-        }
-
         .about-text.collapsed {
             max-height: 120px;
             overflow: hidden;
+        }
+
+        .about-text.expanded {
+            max-height: 1000px; /* Large enough to contain all content */
+            overflow: visible;
         }
 
         .about-text-fade {
@@ -393,16 +375,21 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 40px; /* Slightly taller fade */
+            height: 60px;
             background: linear-gradient(to top, var(--primary-bg) 0%, transparent 100%);
             pointer-events: none;
             z-index: 5;
-            opacity: 0;
+            opacity: 1;
             transition: opacity 0.3s ease;
+            display: none; /* Hidden by default */
         }
 
         .about-text.collapsed ~ .about-text-fade {
-            opacity: 1;
+            display: block;
+        }
+
+        .about-text.expanded ~ .about-text-fade {
+            display: none;
         }
 
         [data-theme="light"] .about-text-fade {
@@ -417,32 +404,32 @@
             background: var(--gradient-2);
             color: white;
             border: none;
-            padding: 1rem 2.2rem; /* Increased padding for larger button */
-            border-radius: 30px; /* Slightly larger border radius */
+            padding: 1rem 2.2rem;
+            border-radius: 30px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
             box-shadow: var(--card-shadow);
-            font-size: 1.1rem; /* Larger font size */
-            min-height: 50px; /* Minimum height for better touch targets */
+            font-size: 1.1rem;
+            min-height: 50px;
             display: inline-flex;
             align-items: center;
             gap: 0.8rem;
         }
 
         .read-more-btn:hover {
-            transform: translateY(-3px); /* Slightly more lift on hover */
+            transform: translateY(-3px);
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
-            background: var(--gradient-1); /* Different gradient on hover for visual feedback */
+            background: var(--gradient-1);
         }
 
         .read-more-btn i {
-            font-size: 1.1rem; /* Larger icon */
+            font-size: 1.1rem;
             transition: transform 0.3s ease;
         }
 
         .read-more-btn:hover i {
-            transform: translateY(2px); /* Animate icon on hover */
+            transform: translateY(2px);
         }
 
         .about-content {
@@ -1656,17 +1643,17 @@
         <div class="about-content">
             <div class="about-image">
                 <div class="profile-placeholder interactive-hover">
-                    <img src="static/pfp.jpg" class="profile-image" alt="Daniel English‑Brown">
+                    <img src="/portfolio-website/static/pfp.JPG" class="profile-image" alt="Daniel English‑Brown">
                 </div>
             </div>
             <div class="read-more-container">
                 <div class="about-text-wrapper">
-                    <div class="about-text read-more-content collapsed" id="aboutText">
+                    <div class="about-text collapsed" id="aboutText">
                         <p>I am a full-stack web developer, theoretical physics master's student with a particular interest in quantum computing and quantitative finance.</p>
                         <p>My experience spans developing software to model the behaviour of light, quantitative research at a London hedge fund and full-stack web development.</p>
                         <p>Alongside my MSc in theoretical physics at King's College London, I am the lead web developer at Expendid, a fintech finance tracker for freelancers, where I architected the advanced web application for the launch of the Expendid app.</p>
                     </div>
-                    <div class="about-text-fade"></div>
+                    <div class="about-text-fade" id="aboutTextFade"></div>
                 </div>
                 <button class="read-more-btn" id="readMoreBtn">
                     <i class="fas fa-chevron-down"></i> Read More
@@ -2405,121 +2392,92 @@
                 lastScrollY = window.scrollY;
             });
 
-            // About section read more functionality - Persistent state version
-            document.addEventListener('DOMContentLoaded', function() {
-                const readMoreBtn = document.getElementById('readMoreBtn');
-                const aboutText = document.getElementById('aboutText');
-                
-                if (readMoreBtn && aboutText) {
-                    // Check if state is saved in localStorage
-                    const savedState = localStorage.getItem('aboutExpanded');
-                    let isExpanded = savedState === 'true';
+            // Fixed About section read more functionality with fade effect
+            const readMoreBtn = document.getElementById('readMoreBtn');
+            const aboutText = document.getElementById('aboutText');
+            const aboutTextFade = document.getElementById('aboutTextFade');
+
+            if (readMoreBtn && aboutText) {
+                // Function to check if read more is needed and setup fade effect
+                const checkReadMoreNeeded = () => {
+                    // Temporarily remove collapsed class to measure full height
+                    aboutText.classList.remove('collapsed');
+                    aboutText.classList.remove('expanded');
+                    const fullHeight = aboutText.scrollHeight;
+                    const lineHeight = parseInt(getComputedStyle(aboutText).lineHeight);
+                    const maxCollapsedHeight = 6 * lineHeight; // Show about 6 lines
                     
-                    // Initialize based on saved state or default to collapsed
-                    function initializeAboutSection() {
-                        // Temporarily remove collapsed class to measure full height
+                    // Re-add collapsed class
+                    aboutText.classList.add('collapsed');
+                    
+                    // Only show button if content is taller than collapsed height
+                    if (fullHeight > maxCollapsedHeight) {
+                        readMoreBtn.style.display = 'inline-flex';
+                        aboutTextFade.style.display = 'block';
+                    } else {
+                        readMoreBtn.style.display = 'none';
                         aboutText.classList.remove('collapsed');
-                        const fullHeight = aboutText.scrollHeight;
-                        const lineHeight = parseInt(getComputedStyle(aboutText).lineHeight);
-                        const maxCollapsedHeight = 6 * lineHeight;
-                        
-                        // Only show button if content is taller than collapsed height
-                        if (fullHeight > maxCollapsedHeight) {
-                            readMoreBtn.style.display = 'inline-flex';
-                            
-                            // Apply saved state or default to collapsed
-                            if (isExpanded) {
-                                aboutText.classList.remove('collapsed');
-                                readMoreBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Read Less';
-                            } else {
-                                aboutText.classList.add('collapsed');
-                                readMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Read More';
-                            }
-                        } else {
-                            readMoreBtn.style.display = 'none';
-                            aboutText.classList.remove('collapsed');
-                        }
+                        aboutTextFade.style.display = 'none';
+                    }
+                };
+                
+                // Initialize on load
+                setTimeout(checkReadMoreNeeded, 100);
+                
+                // Also check on window resize
+                window.addEventListener('resize', checkReadMoreNeeded);
+                
+                // Read more/less functionality - FIXED
+                readMoreBtn.addEventListener('click', () => {
+                    const isCollapsed = aboutText.classList.contains('collapsed');
+                    
+                    if (isCollapsed) {
+                        // Expand the text
+                        aboutText.classList.remove('collapsed');
+                        aboutText.classList.add('expanded');
+                        readMoreBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Read Less';
+                        aboutTextFade.style.display = 'none';
+                    } else {
+                        // Collapse the text
+                        aboutText.classList.remove('expanded');
+                        aboutText.classList.add('collapsed');
+                        readMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Read More';
+                        aboutTextFade.style.display = 'block';
                     }
                     
-                    // Initialize on load
-                    setTimeout(initializeAboutSection, 100);
+                    // Add click animation
+                    readMoreBtn.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        readMoreBtn.style.transform = 'scale(1)';
+                    }, 150);
                     
-                    // Re-initialize on window resize
-                    window.addEventListener('resize', initializeAboutSection);
-                    
-                    // Read more/less functionality
-                    readMoreBtn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        
-                        isExpanded = !isExpanded;
-                        
-                        // Save state to localStorage
-                        localStorage.setItem('aboutExpanded', isExpanded.toString());
-                        
-                        if (isExpanded) {
-                            aboutText.classList.remove('collapsed');
-                            readMoreBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Read Less';
-                        } else {
-                            aboutText.classList.add('collapsed');
-                            readMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Read More';
-                        }
-                        
-                        // Button animation
-                        readMoreBtn.style.transform = 'scale(0.95)';
+                    // Smooth scroll to keep button in view when expanding
+                    if (isCollapsed) {
                         setTimeout(() => {
-                            readMoreBtn.style.transform = 'scale(1)';
-                        }, 150);
-                    });
-                    
-                    // Remove any event listeners that might be causing auto-collapse
-                    aboutText.addEventListener('scroll', (e) => {
-                        e.stopPropagation();
-                    });
-                    
-                    // Prevent any Intersection Observer from affecting the about section
-                    const aboutSection = document.getElementById('about');
-                    if (aboutSection) {
-                        // Remove any existing intersection observers
-                        aboutSection.style.animationPlayState = 'running';
-                        
-                        // Add a mutation observer to prevent auto-collapse
-                        const observer = new MutationObserver(function(mutations) {
-                            mutations.forEach(function(mutation) {
-                                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                                    // If someone tries to add collapsed class programmatically, remove it if expanded
-                                    if (isExpanded && aboutText.classList.contains('collapsed')) {
-                                        aboutText.classList.remove('collapsed');
-                                    }
-                                }
+                            readMoreBtn.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'nearest'
                             });
-                        });
-                        
-                        observer.observe(aboutText, {
-                            attributes: true,
-                            attributeFilter: ['class']
-                        });
+                        }, 300);
                     }
-                    
-                    // Add click animation to button
-                    readMoreBtn.addEventListener('mousedown', () => {
-                        readMoreBtn.style.transform = 'scale(0.9)';
-                    });
-                    
-                    readMoreBtn.addEventListener('mouseup', () => {
-                        readMoreBtn.style.transform = 'scale(1)';
-                    });
-                    
-                    readMoreBtn.addEventListener('mouseleave', () => {
-                        readMoreBtn.style.transform = 'scale(1)';
-                    });
-                    
-                    readMoreBtn.addEventListener('touchend', (e) => {
+                });
+                
+                // Prevent scrolling from expanding the text on mobile
+                aboutText.addEventListener('scroll', (e) => {
+                    // If text is collapsed, prevent any scrolling behavior that might expand it
+                    if (aboutText.classList.contains('collapsed')) {
                         e.preventDefault();
-                        readMoreBtn.style.transform = 'scale(1)';
-                    });
-                }
-            });
+                        aboutText.scrollTop = 0;
+                    }
+                });
+                
+                // Add touch event prevention for mobile
+                aboutText.addEventListener('touchmove', (e) => {
+                    if (aboutText.classList.contains('collapsed')) {
+                        e.preventDefault();
+                    }
+                }, { passive: false });
+            }
 
             // CV Download functionality
             const downloadCV = document.getElementById('downloadCV');
