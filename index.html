@@ -29,25 +29,38 @@
 
   <!-- JSON-LD Schema.org -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Daniel English-Brown",
-    "alternateName": "Daniel English",
-    "url": "https://danielenglish.me",
-    "image": "https://danielenglish.me/static/pfp.jpg",
-    "email": "mailto:danielenglish.zim13@gmail.com",
-    "jobTitle": "Web Developer & MSc Theoretical Physics Student",
-    "affiliation": {
-      "@type": "CollegeOrUniversity",
-      "name": "King's College London"
-    },
-    "sameAs": [
-      "https://www.linkedin.com/in/daniel-english-brown/",
-      "https://github.com/danenglishbrown"
-    ],
-    "knowsAbout": ["web development","quantitative finance","computational physics","theoretical physics","quantum computing"]
-  }
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Daniel English-Brown",
+      "jobTitle": ["Web Developer", "Theoretical Physics Student"],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Expendid"
+      },
+      "alumniOf": {
+        "@type": "CollegeOrUniversity", 
+        "name": "King's College London"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Clapham",
+        "addressRegion": "London", 
+        "addressCountry": "UK"
+      },
+      "hasOccupation": [
+        {
+          "@type": "Occupation",
+          "name": "Web Developer",
+          "skills": ["Flask", "Python", "JavaScript", "React"]
+        },
+        {
+          "@type": "Occupation", 
+          "name": "Physics Researcher",
+          "skills": ["FDTD Simulation", "Computational Physics", "Quantum Computing", "Theoretical Physics"]
+        }
+      ]
+    }
   </script>
 
   <!-- Fonts & Icons -->
