@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow sensitive or irrelevant folders (adjust if needed)
+Disallow: /static/admin/
+Disallow: /tmp/
+
+Sitemap: https://danielenglish.me/sitemap.xml
