@@ -119,14 +119,21 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: fadeInUp 1s ease;
-            }
+        }
 
-            /* Override for light mode - use solid text color instead of gradient */
-            [data-theme="light"] .hero-content h1 {
+        /* put this AFTER the existing .hero-content h1 rule */
+        .hero .hero-content h1 {
+          background: none !important;
+          -webkit-text-fill-color: var(--brand-blue) !important;
+          color: var(--brand-blue) !important; /* fallback */
+        }
+
+        /* Override for light mode - use solid text color instead of gradient */
+        [data-theme="light"] .hero-content h1 {
             background: none;
             -webkit-text-fill-color: var(--primary-text);
             color: var(--primary-text);
-            }
+        }
 
 
         [data-theme="light"] {
