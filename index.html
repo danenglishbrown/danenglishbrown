@@ -1580,50 +1580,259 @@
         }
 
         /* Subtle caption and spacing */
-.about-caption {
-  margin-top: .75rem;
-  font-size: .9rem;
-  color: var(--secondary-text);
-  text-align: center;
-}
+        .about-caption {
+        margin-top: .75rem;
+        font-size: .9rem;
+        color: var(--secondary-text);
+        text-align: center;
+        }
 
-/* Highlights list styling */
-.about-highlights {
-  list-style: none;
-  margin: 1.25rem 0 0;
-  padding: 0;
-  display: grid;
-  gap: .6rem;
-}
-.about-highlights li {
-  display: grid;
-  grid-template-columns: 22px 1fr;
-  align-items: start;
-  gap: .6rem;
-  padding: .6rem .8rem;
-  background: var(--secondary-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-}
-.about-highlights i {
-  color: var(--accent-color);
-  line-height: 1.2;
-  margin-top: .2rem;
-}
+        /* Highlights list styling */
+        .about-highlights {
+        list-style: none;
+        margin: 1.25rem 0 0;
+        padding: 0;
+        display: grid;
+        gap: .6rem;
+        }
+        .about-highlights li {
+        display: grid;
+        grid-template-columns: 22px 1fr;
+        align-items: start;
+        gap: .6rem;
+        padding: .6rem .8rem;
+        background: var(--secondary-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        }
+        .about-highlights i {
+        color: var(--accent-color);
+        line-height: 1.2;
+        margin-top: .2rem;
+        }
 
-/* CTAs under the paragraph */
-.about-ctas {
-  display: flex;
-  gap: .8rem;
-  flex-wrap: wrap;
-  margin-top: 1.25rem;
-}
+        /* CTAs under the paragraph */
+        .about-ctas {
+        display: flex;
+        gap: .8rem;
+        flex-wrap: wrap;
+        margin-top: 1.25rem;
+        }
 
-/* Mobile tweaks: add vertical breathing room around the portrait */
-@media (max-width: 768px) {
-  .about-image { padding-top: 32px; padding-bottom: 32px; }
-  .about-ctas { justify-content: center; }
-}
+        /* Mobile tweaks: add vertical breathing room around the portrait */
+        @media (max-width: 768px) {
+        .about-image { padding-top: 32px; padding-bottom: 32px; }
+        .about-ctas { justify-content: center; }
+        }
+
+        /* Web Development Portfolio Section */
+        #web-portfolio {
+            background: var(--secondary-bg);
+            border-radius: 20px;
+            margin: 4rem auto;
+            padding: 6rem 2rem;
+        }
+
+        .portfolio-intro {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+            font-size: 1.2rem;
+            color: var(--secondary-text);
+            line-height: 1.6;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .portfolio-item {
+            background: var(--primary-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .portfolio-header {
+            background: var(--gradient-primary);
+            padding: 2rem;
+            color: white;
+            position: relative;
+        }
+
+        .portfolio-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .portfolio-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .portfolio-subtitle {
+            opacity: 0.9;
+            font-size: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .portfolio-content {
+            padding: 2rem;
+        }
+
+        .portfolio-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-tag {
+            background: var(--accent-bg);
+            color: var(--accent-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .feature-tag:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .portfolio-description {
+            color: var(--secondary-text);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .portfolio-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .portfolio-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .portfolio-link:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* PDF Section */
+        .pdf-section {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .pdf-card {
+            background: var(--primary-bg);
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .pdf-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .pdf-icon {
+            font-size: 3rem;
+            color: #e74c3c;
+            margin-bottom: 1.5rem;
+        }
+
+        .pdf-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-text);
+        }
+
+        .pdf-content p {
+            color: var(--secondary-text);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            #web-portfolio {
+                padding: 4rem 1rem;
+                margin: 2rem auto;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .portfolio-header {
+                padding: 1.5rem;
+            }
+
+            .portfolio-content {
+                padding: 1.5rem;
+            }
+
+            .portfolio-features {
+                gap: 0.5rem;
+            }
+
+            .feature-tag {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .portfolio-links {
+                flex-direction: column;
+            }
+
+            .portfolio-link {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .pdf-card {
+                padding: 2rem;
+            }
+        }
 
     </style>
 </head>
@@ -1656,6 +1865,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#web-portfolio">Portfolio</a></li>
                 <li><a href="#testimonials">Reviews</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button></li>
@@ -1937,6 +2147,158 @@
                         <span class="project-link">
                             <i class="fas fa-certificate"></i> Completed
                         </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Web Development Portfolio Section -->
+    <section id="web-portfolio" class="fade-in">
+        <h2 class="section-title">Web Development Portfolio</h2>
+        
+        <div class="portfolio-container">
+            <!-- Portfolio Introduction -->
+            <div class="portfolio-intro">
+                <p>A curated collection of professional web development projects showcasing responsive design, modern UI/UX, and full-stack implementation.</p>
+            </div>
+
+            <!-- Portfolio Projects Grid -->
+            <div class="portfolio-grid">
+                <!-- Expendid Project -->
+                <div class="portfolio-item">
+                    <div class="portfolio-header">
+                        <div class="portfolio-badge">Featured</div>
+                        <h3>Expendid Finance Platform</h3>
+                        <p class="portfolio-subtitle">AI-Powered Expense Tracking</p>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-features">
+                            <span class="feature-tag">Waitlist System</span>
+                            <span class="feature-tag">Referral Tracking</span>
+                            <span class="feature-tag">Admin Dashboard</span>
+                            <span class="feature-tag">Glass UI</span>
+                        </div>
+                        <p class="portfolio-description">
+                            Complete fintech platform with public waitlist, referral system, and secure admin tools built with Flask and modern JavaScript.
+                        </p>
+                        <div class="portfolio-links">
+                            <a href="https://expendid.co.uk" class="portfolio-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Live Site
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Portfolio -->
+                <div class="portfolio-item">
+                    <div class="portfolio-header">
+                        <h3>Personal Portfolio</h3>
+                        <p class="portfolio-subtitle">Interactive Developer Showcase</p>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-features">
+                            <span class="feature-tag">Dark/Light Mode</span>
+                            <span class="feature-tag">Physics Animations</span>
+                            <span class="feature-tag">Responsive Design</span>
+                            <span class="feature-tag">Testimonial Carousel</span>
+                        </div>
+                        <p class="portfolio-description">
+                            Custom-built portfolio featuring animated backgrounds, interactive elements, and smart contact integration.
+                        </p>
+                        <div class="portfolio-links">
+                            <span class="current-site-indicator">
+                                <i class="fas fa-map-marker-alt"></i> You are here
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hedge Fund Website -->
+                <div class="portfolio-item">
+                    <div class="portfolio-header">
+                        <h3>Hedge Fund Platform</h3>
+                        <p class="portfolio-subtitle">Professional Financial Portal</p>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-features">
+                            <span class="feature-tag">Investor Portal</span>
+                            <span class="feature-tag">Data Visualization</span>
+                            <span class="feature-tag">Compliance Ready</span>
+                            <span class="feature-tag">Secure Access</span>
+                        </div>
+                        <p class="portfolio-description">
+                            Compliance-ready financial platform with investor relations portal, performance dashboards, and secure data management.
+                        </p>
+                        <div class="portfolio-links">
+                            <span class="portfolio-link coming-soon">
+                                <i class="fas fa-lock"></i> Private Client
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Church Website -->
+                <div class="portfolio-item">
+                    <div class="portfolio-header">
+                        <h3>Church Website</h3>
+                        <p class="portfolio-subtitle">Traditional Catholic Parish</p>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-features">
+                            <span class="feature-tag">Mass Schedules</span>
+                            <span class="feature-tag">Sacraments Info</span>
+                            <span class="feature-tag">Parish Bulletin</span>
+                            <span class="feature-tag">Donation System</span>
+                        </div>
+                        <p class="portfolio-description">
+                            Comprehensive parish website with mass schedules, sacramental information, and community engagement features.
+                        </p>
+                        <div class="portfolio-links">
+                            <span class="portfolio-link coming-soon">
+                                <i class="fas fa-church"></i> Religious Organization
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Restaurant Website -->
+                <div class="portfolio-item">
+                    <div class="portfolio-header">
+                        <h3>Restaurant Platform</h3>
+                        <p class="portfolio-subtitle">Fine Dining Experience</p>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-features">
+                            <span class="feature-tag">Online Reservations</span>
+                            <span class="feature-tag">Menu Showcase</span>
+                            <span class="feature-tag">Event Promotion</span>
+                            <span class="feature-tag">Mobile-First</span>
+                        </div>
+                        <p class="portfolio-description">
+                            Elegant restaurant website featuring online reservations, menu presentation, and event promotion with mobile-optimized design.
+                        </p>
+                        <div class="portfolio-links">
+                            <span class="portfolio-link coming-soon">
+                                <i class="fas fa-utensils"></i> Hospitality Client
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PDF Download Section -->
+            <div class="pdf-section">
+                <div class="pdf-card">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="pdf-content">
+                        <h3>Full Web Development Portfolio</h3>
+                        <p>Download the complete PDF portfolio with detailed case studies, design process, and additional project insights.</p>
+                        <a href="static/web_development_portfolio.pdf" class="btn btn-primary" download>
+                            <i class="fas fa-download"></i> Download PDF Portfolio
+                        </a>
                     </div>
                 </div>
             </div>
@@ -2849,6 +3211,42 @@
                 if ('ontouchstart' in window) {
                     card.style.cursor = 'pointer';
                     card.style.webkitTapHighlightColor = 'transparent';
+                }
+            });
+        });
+
+        // Add this to your existing JavaScript
+function initPortfolioSection() {
+    // Portfolio item animations
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    
+    portfolioItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.1}s`;
+        
+        // Add click to expand functionality on mobile
+        if (window.innerWidth <= 768) {
+            item.addEventListener('click', function() {
+                this.classList.toggle('expanded');
+            });
+        }
+    });
+}
+
+        // Call this function in your DOMContentLoaded event
+        document.addEventListener('DOMContentLoaded', function() {
+            initPortfolioSection();
+            
+            // Add smooth scrolling to the new section
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === '#web-portfolio') {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        document.querySelector('#web-portfolio').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    });
                 }
             });
         });
