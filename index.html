@@ -122,17 +122,18 @@
         }
 
         /* put this AFTER the existing .hero-content h1 rule */
+        /* Hero title color changes with theme */
         .hero .hero-content h1 {
-          background: none !important;
-          -webkit-text-fill-color: var(--brand-blue) !important;
-          color: var(--brand-blue) !important; /* fallback */
+          background: var(--gradient-1);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
-
-        /* Override for light mode - use solid text color instead of gradient */
-        [data-theme="light"] .hero-content h1 {
-            background: none;
-            -webkit-text-fill-color: var(--primary-text);
-            color: var(--primary-text);
+        
+        [data-theme="light"] .hero .hero-content h1 {
+          background: none;
+          -webkit-text-fill-color: var(--primary-text);
+          color: var(--primary-text);
         }
 
 
