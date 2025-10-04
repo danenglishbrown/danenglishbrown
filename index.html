@@ -1683,10 +1683,28 @@
         }
 
         .portfolio-header {
-            background: var(--gradient-primary);
             padding: 2rem;
-            color: white;
-            position: relative;
+            background: var(--gradient-2);
+            color: white; /* This ensures white text on the gradient background */
+        }
+    
+        .portfolio-header h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: white !important; /* Force white text */
+        }
+    
+        .portfolio-subtitle {
+            opacity: 0.9;
+            font-size: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: rgba(255, 255, 255, 0.9) !important; /* Force light text */
+        }
+
+        [data-theme="light"] .portfolio-item .portfolio-header h3,
+        [data-theme="light"] .portfolio-item .portfolio-subtitle {
+            color: white !important; /* Keep white text on gradient in light mode too */
         }
 
         .portfolio-badge {
@@ -1699,18 +1717,31 @@
             font-size: 0.8rem;
             font-weight: 600;
             backdrop-filter: blur(10px);
+            color: white;
+            z-index: 2; /* Ensure it stays above content */
+            max-width: 120px; /* Prevent overflow */
+            text-align: center;
+            line-height: 1.2;
         }
-
-        .portfolio-header h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
+    
+        /* Add featured badge to personal website portfolio item */
+        .portfolio-item:nth-child(2) .portfolio-header { /* Personal Portfolio item */
+            position: relative;
+        }
+    
+        .portfolio-item:nth-child(2) .portfolio-header::after {
+            content: 'Featured';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 600;
-        }
-
-        .portfolio-subtitle {
-            opacity: 0.9;
-            font-size: 1rem;
-            font-family: 'JetBrains Mono', monospace;
+            backdrop-filter: blur(10px);
+            color: white;
+            z-index: 2;
         }
 
         .portfolio-content {
