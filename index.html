@@ -1,39 +1,1025 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Daniel English-Brown | Web Developer & Theoretical Physics MSc Student</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0c0f" />
 
-  <!-- Meta Description -->
-  <meta name="description" content="Portfolio of Daniel English-Brown — MSc Theoretical Physics student at King's College London and Lead Web Developer. Expertise in web development, quantitative finance, and computational physics.">
-  <meta name="author" content="Daniel English-Brown">
-  <meta name="robots" content="index, follow">
+  <title>Daniel English-Brown | Physics, Software & Quantitative Modelling</title>
+  <meta name="description" content="Daniel English-Brown is an MSc Theoretical Physics student at King's College London working across scientific computing, quantitative modelling and full-stack software development." />
+  <meta name="author" content="Daniel English-Brown" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://danielenglish.me/" />
 
-  <!-- Canonical -->
-  <link rel="canonical" href="https://danielenglish.me/">
+  <meta property="og:title" content="Daniel English-Brown | Physics, Software & Quantitative Modelling" />
+  <meta property="og:description" content="Selected work in scientific computing, quantitative modelling and full-stack software." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://danielenglish.me/" />
+  <meta property="og:image" content="https://danielenglish.me/static/seo-card.jpg" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Daniel English-Brown | Web Developer & Theoretical Physics MSc Student">
-  <meta property="og:description" content="Portfolio of Daniel English-Brown — MSc Theoretical Physics student and Web Developer with expertise in computational physics, quantitative finance, and modern web design.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://danielenglish.me/">
-  <meta property="og:image" content="https://danielenglish.me/static/seo-card.jpg">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Daniel English-Brown | Physics, Software & Quantitative Modelling" />
+  <meta name="twitter:description" content="Selected work in scientific computing, quantitative modelling and full-stack software." />
+  <meta name="twitter:image" content="https://danielenglish.me/static/seo-card.jpg" />
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Daniel English-Brown | Web Developer & Theoretical Physics MSc Student">
-  <meta name="twitter:description" content="Explore the portfolio of Daniel English-Brown: web developer, MSc Theoretical Physics student, and quantitative finance researcher.">
-  <meta name="twitter:image" content="https://danielenglish.me/static/seo-card.jpg">
-
-  <!-- JSON-LD Schema.org -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Daniel English-Brown",
     "alternateName": "Daniel English",
-    "url": "https://danielenglish.me",
+    "url": "https://danielenglish.me/",
+    "image": "https://danielenglish.me/static/pfp.jpg",
+    "email": "mailto:danielenglish.zim13@gmail.com",
+    "jobTitle": "MSc Theoretical Physics Student & Software Developer",
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "King's College London"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/daniel-english-brown/",
+      "https://github.com/danenglishbrown"
+    ],
+    "knowsAbout": [
+      "Theoretical Physics",
+      "Scientific Computing",
+      "Computational Physics",
+      "Quantitative Finance",
+      "Python",
+      "Full-stack Web Development",
+      "Numerical Methods"
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0b0c0f;
+      --bg-soft: #111318;
+      --surface: #151820;
+      --surface-2: #1b1f29;
+      --text: #f1efe8;
+      --muted: #9da2ac;
+      --quiet: #6e7480;
+      --line: #292e39;
+      --accent: #67a9ff;
+      --accent-2: #a6ccff;
+      --good: #9bd6bc;
+      --shadow: 0 20px 70px rgba(0,0,0,.25);
+      --max: 1240px;
+      --serif: "Newsreader", Georgia, serif;
+      --sans: "Inter", system-ui, sans-serif;
+      --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+    }
+
+    [data-theme="light"] {
+      --bg: #f2f0ea;
+      --bg-soft: #ebe8e0;
+      --surface: #faf9f5;
+      --surface-2: #f0eee7;
+      --text: #161718;
+      --muted: #62666d;
+      --quiet: #8a8e94;
+      --line: #d5d1c7;
+      --accent: #245f9e;
+      --accent-2: #174a7b;
+      --good: #276f53;
+      --shadow: 0 20px 70px rgba(32,33,34,.08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      transition: background .25s ease, color .25s ease;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+      background-image:
+        linear-gradient(to right, color-mix(in srgb, var(--line) 42%, transparent) 1px, transparent 1px),
+        linear-gradient(to bottom, color-mix(in srgb, var(--line) 30%, transparent) 1px, transparent 1px);
+      background-size: 72px 72px;
+      opacity: .18;
+      mask-image: linear-gradient(to bottom, #000 0%, transparent 62%);
+    }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    img { max-width: 100%; display: block; }
+    ::selection { background: color-mix(in srgb, var(--accent) 36%, transparent); }
+
+    .skip-link {
+      position: fixed;
+      left: 1rem;
+      top: -5rem;
+      z-index: 9999;
+      padding: .7rem 1rem;
+      background: var(--text);
+      color: var(--bg);
+      text-decoration: none;
+      border-radius: 999px;
+      transition: top .2s ease;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    .wrap { width: min(calc(100% - 2.5rem), var(--max)); margin-inline: auto; }
+    .section { padding: 8rem 0; border-top: 1px solid var(--line); }
+    .section-grid { display: grid; grid-template-columns: 180px 1fr; gap: 3.5rem; }
+    .section-index {
+      font-family: var(--mono);
+      font-size: .76rem;
+      line-height: 1.4;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--quiet);
+      position: sticky;
+      top: 7rem;
+      align-self: start;
+    }
+    .eyebrow {
+      margin: 0 0 1rem;
+      font-family: var(--mono);
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .display {
+      font-family: var(--serif);
+      font-weight: 500;
+      letter-spacing: -.045em;
+      line-height: .94;
+    }
+    .section-title {
+      margin: 0 0 1.1rem;
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6vw, 5.8rem);
+      line-height: .96;
+      letter-spacing: -.045em;
+      font-weight: 500;
+    }
+    .section-lead { margin: 0; max-width: 740px; color: var(--muted); font-size: 1.08rem; }
+
+    /* Navigation */
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 1000;
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: baseline;
+      gap: .75rem;
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: .83rem;
+      letter-spacing: .06em;
+    }
+    .brand-mark {
+      width: 2rem;
+      height: 2rem;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      font-size: .7rem;
+      color: var(--accent);
+    }
+    .nav-links { display: flex; align-items: center; gap: 1.8rem; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: .86rem;
+      color: var(--muted);
+      transition: color .2s ease;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--text); }
+    .theme-toggle, .menu-toggle {
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: var(--surface);
+      border-radius: 999px;
+      min-width: 42px;
+      height: 42px;
+      display: inline-grid;
+      place-items: center;
+      cursor: pointer;
+      font: inherit;
+    }
+    .menu-toggle { display: none; }
+
+    /* Hero */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding: 9.5rem 0 5rem;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 46rem;
+      height: 46rem;
+      border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+      border-radius: 50%;
+      right: -18rem;
+      top: 9rem;
+      pointer-events: none;
+      box-shadow: 0 0 0 9rem color-mix(in srgb, var(--accent) 2%, transparent), 0 0 0 18rem color-mix(in srgb, var(--accent) 1%, transparent);
+    }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(350px, .88fr); gap: 5rem; align-items: center; position: relative; z-index: 2; }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem 1.5rem;
+      margin-bottom: 1.8rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: .77rem;
+    }
+    .hero h1 {
+      margin: 0;
+      max-width: 780px;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(4.6rem, 9.4vw, 9.5rem);
+      letter-spacing: -.065em;
+      line-height: .82;
+    }
+    .hero h1 .accent { color: var(--accent); }
+    .hero-intro { margin: 2rem 0 0; max-width: 710px; font-size: clamp(1rem, 1.5vw, 1.28rem); color: var(--muted); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2.3rem; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      min-height: 48px;
+      padding: .8rem 1.15rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      text-decoration: none;
+      font-size: .88rem;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--accent) 70%, var(--line)); }
+    .button.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .button.ghost { background: color-mix(in srgb, var(--surface) 72%, transparent); }
+
+    .terminal {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+      box-shadow: var(--shadow);
+      border-radius: 18px;
+      overflow: hidden;
+      transform: rotate(1.25deg);
+    }
+    .terminal-bar {
+      height: 46px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      font-family: var(--mono);
+      font-size: .72rem;
+      color: var(--quiet);
+    }
+    .terminal-dots { display: flex; gap: .45rem; }
+    .terminal-dots span { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
+    .terminal-body { padding: 1.25rem; font-family: var(--mono); font-size: clamp(.72rem, 1.2vw, .88rem); min-height: 390px; overflow: hidden; }
+    .code-line { display: flex; gap: .9rem; margin: 0 0 .55rem; }
+    .ln { color: var(--quiet); width: 1.4rem; user-select: none; }
+    .prompt { color: var(--good); }
+    .key { color: var(--accent-2); }
+    .str { color: var(--good); }
+    .comment { color: var(--quiet); }
+    .cursor { display: inline-block; width: .5em; height: 1.1em; background: var(--accent); vertical-align: -2px; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-rule {
+      margin-top: 4.8rem;
+      padding-top: 1.1rem;
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .hero-rule div { font-family: var(--mono); font-size: .72rem; color: var(--quiet); }
+    .hero-rule strong { display: block; margin-bottom: .35rem; color: var(--text); font-weight: 500; font-size: .78rem; }
+
+    /* Work */
+    .work-stack { margin-top: 5rem; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .case-study {
+      background: var(--bg);
+      display: grid;
+      grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
+      min-height: 590px;
+    }
+    .case-study:nth-child(even) .case-copy { order: 2; }
+    .case-study:nth-child(even) .case-visual { order: 1; }
+    .case-copy { padding: clamp(2rem, 5vw, 4.5rem); display: flex; flex-direction: column; justify-content: center; }
+    .case-number { font-family: var(--mono); font-size: .72rem; color: var(--quiet); margin-bottom: 1.4rem; }
+    .case-title { margin: 0; font-family: var(--serif); font-weight: 500; font-size: clamp(2.5rem, 5vw, 5rem); line-height: .95; letter-spacing: -.045em; }
+    .case-sub { margin: .9rem 0 1.6rem; color: var(--accent); font-family: var(--mono); font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; }
+    .case-description { color: var(--muted); max-width: 620px; }
+    .case-meta { margin: 2rem 0 0; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1.4rem; }
+    .case-meta dt { font-family: var(--mono); color: var(--quiet); font-size: .7rem; text-transform: uppercase; letter-spacing: .07em; }
+    .case-meta dd { margin: .45rem 0 0; font-size: .88rem; }
+    .case-links { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+    .text-link { font-family: var(--mono); font-size: .78rem; text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: .2rem; }
+    .text-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    .case-visual { min-height: 500px; background: var(--surface); position: relative; overflow: hidden; display: grid; place-items: center; padding: clamp(1.3rem, 4vw, 3rem); }
+    .visual-label { position: absolute; left: 1.25rem; top: 1.1rem; font-family: var(--mono); color: var(--quiet); font-size: .67rem; letter-spacing: .06em; text-transform: uppercase; z-index: 3; }
+
+    .browser {
+      width: min(92%, 610px);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--bg);
+      box-shadow: 0 30px 80px rgba(0,0,0,.24);
+      transform: rotate(-1.25deg);
+    }
+    .browser-top { height: 38px; background: var(--surface-2); border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: .4rem; padding: 0 .8rem; }
+    .browser-top span { width: 7px; height: 7px; border-radius: 50%; background: var(--quiet); opacity: .45; }
+    .browser-content { padding: 1.4rem; }
+    .dash-title { height: 9px; width: 42%; background: var(--text); opacity: .88; border-radius: 99px; margin-bottom: .65rem; }
+    .dash-sub { height: 6px; width: 64%; background: var(--muted); opacity: .35; border-radius: 99px; margin-bottom: 1.4rem; }
+    .dash-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: .65rem; }
+    .dash-card { border: 1px solid var(--line); border-radius: 9px; padding: .9rem; min-height: 95px; background: var(--surface); }
+    .dash-card strong { display: block; font-family: var(--mono); font-size: .68rem; color: var(--quiet); font-weight: 500; }
+    .dash-card b { display: block; margin-top: .85rem; font-family: var(--serif); font-weight: 500; font-size: 1.5rem; }
+    .dash-chart { margin-top: .75rem; border: 1px solid var(--line); border-radius: 9px; height: 170px; position: relative; overflow: hidden; background: linear-gradient(to top, color-mix(in srgb, var(--accent) 6%, transparent), transparent); }
+    .dash-chart svg { width: 100%; height: 100%; }
+
+    .fdtd-stage { width: min(92%, 640px); aspect-ratio: 1.15; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: #080b10; position: relative; box-shadow: 0 30px 80px rgba(0,0,0,.3); }
+    #fdtdCanvas { width: 100%; height: 100%; display: block; }
+    .fdtd-overlay { position: absolute; inset: auto 1rem 1rem; display: flex; justify-content: space-between; gap: 1rem; color: #b8c0cf; font-family: var(--mono); font-size: .65rem; pointer-events: none; }
+    .fdtd-chip { padding: .45rem .65rem; border: 1px solid rgba(255,255,255,.14); border-radius: 999px; background: rgba(10,13,19,.66); backdrop-filter: blur(8px); }
+
+    .quant-stage { width: min(92%, 650px); border: 1px solid var(--line); border-radius: 18px; background: var(--bg); padding: 1.4rem; box-shadow: 0 30px 80px rgba(0,0,0,.2); }
+    .quant-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; font-family: var(--mono); font-size: .68rem; color: var(--quiet); }
+    .quant-stage svg { width: 100%; height: auto; display: block; overflow: visible; }
+    .quant-legend { margin-top: .8rem; display: flex; gap: 1rem; font-family: var(--mono); font-size: .63rem; color: var(--quiet); }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; margin-right: .35rem; }
+
+    .quote-inline { margin-top: auto; padding-top: 2rem; border-top: 1px solid var(--line); }
+    .quote-inline blockquote { margin: 0; font-family: var(--serif); font-size: 1.22rem; line-height: 1.35; }
+    .quote-inline cite { margin-top: .85rem; display: block; color: var(--quiet); font-family: var(--mono); font-size: .66rem; font-style: normal; }
+
+    /* Other builds */
+    .build-list { margin-top: 4rem; border-top: 1px solid var(--line); }
+    .build-row {
+      display: grid;
+      grid-template-columns: 90px minmax(0, 1.2fr) minmax(0, .9fr) 34px;
+      gap: 1rem;
+      align-items: center;
+      min-height: 92px;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+      transition: padding .2s ease, background .2s ease;
+    }
+    .build-row:hover { padding-inline: .75rem; background: color-mix(in srgb, var(--surface) 55%, transparent); }
+    .build-no { font-family: var(--mono); color: var(--quiet); font-size: .7rem; }
+    .build-name { font-family: var(--serif); font-size: clamp(1.4rem, 2.5vw, 2.1rem); line-height: 1; }
+    .build-tech { font-family: var(--mono); color: var(--muted); font-size: .7rem; }
+    .build-arrow { color: var(--accent); }
+
+    /* Toolkit */
+    .tool-grid { margin-top: 4rem; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .tool-column { padding: 1.8rem; min-height: 250px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .tool-column h3 { margin: 0 0 1.3rem; font-family: var(--mono); font-size: .73rem; color: var(--accent); text-transform: uppercase; letter-spacing: .07em; font-weight: 500; }
+    .tool-column ul { list-style: none; padding: 0; margin: 0; }
+    .tool-column li { padding: .34rem 0; color: var(--muted); font-size: .91rem; }
+
+    /* About */
+    .about-grid { margin-top: 4rem; display: grid; grid-template-columns: minmax(280px, .72fr) minmax(0, 1.28fr); gap: 5rem; align-items: start; }
+    .portrait-frame { position: sticky; top: 7rem; }
+    .portrait {
+      border-radius: 2px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      aspect-ratio: 4 / 5;
+    }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.82) contrast(1.02); }
+    .portrait-caption { margin-top: .8rem; display: flex; justify-content: space-between; gap: 1rem; color: var(--quiet); font-family: var(--mono); font-size: .66rem; }
+    .about-copy { font-family: var(--serif); font-size: clamp(1.55rem, 3vw, 2.65rem); line-height: 1.22; letter-spacing: -.02em; }
+    .about-copy p { margin: 0 0 1.3rem; }
+    .about-copy .muted { color: var(--muted); }
+    .life-grid { margin-top: 3rem; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .life-item { min-height: 190px; padding: 1.4rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .life-label { font-family: var(--mono); color: var(--accent); font-size: .68rem; text-transform: uppercase; letter-spacing: .07em; }
+    .life-item h3 { margin: .75rem 0 .45rem; font-family: var(--serif); font-size: 1.55rem; font-weight: 500; }
+    .life-item p { margin: 0; color: var(--muted); font-size: .88rem; }
+
+    /* Contact */
+    .contact-panel { margin-top: 4rem; padding: clamp(2rem, 5vw, 4.5rem); border: 1px solid var(--line); background: var(--surface); display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: end; }
+    .contact-panel h3 { margin: 0; font-family: var(--serif); font-weight: 500; font-size: clamp(2.5rem, 6vw, 6rem); line-height: .92; letter-spacing: -.045em; }
+    .contact-panel p { margin: 1rem 0 0; color: var(--muted); max-width: 650px; }
+    .contact-links { display: flex; flex-direction: column; gap: .7rem; align-items: flex-end; }
+    .contact-links a, .copy-email { background: none; border: 0; color: var(--text); font: inherit; font-family: var(--mono); font-size: .78rem; text-decoration: none; cursor: pointer; padding: .2rem 0; border-bottom: 1px solid var(--line); }
+    .contact-links a:hover, .copy-email:hover { color: var(--accent); border-color: var(--accent); }
+
+    footer { border-top: 1px solid var(--line); padding: 1.7rem 0 2.4rem; }
+    .footer-grid { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; font-family: var(--mono); font-size: .68rem; color: var(--quiet); }
+
+    /* Reveal */
+    [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
+    [data-reveal].visible { opacity: 1; transform: none; }
+
+    /* Responsive */
+    @media (max-width: 1020px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .terminal { max-width: 720px; transform: none; }
+      .section-grid { grid-template-columns: 1fr; gap: 1.6rem; }
+      .section-index { position: static; }
+      .case-study { grid-template-columns: 1fr; }
+      .case-study:nth-child(even) .case-copy, .case-study:nth-child(even) .case-visual { order: initial; }
+      .case-visual { min-height: 430px; }
+      .tool-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .portrait-frame { position: static; max-width: 520px; }
+    }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(calc(100% - 1.5rem), var(--max)); }
+      .section { padding: 5.5rem 0; }
+      .nav-links {
+        position: fixed;
+        left: .75rem;
+        right: .75rem;
+        top: 79px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: .6rem;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: .9rem .8rem; border-bottom: 1px solid var(--line); }
+      .nav-links a:last-of-type { border-bottom: 0; }
+      .theme-toggle { margin-top: .5rem; width: 100%; border-radius: 10px; }
+      .menu-toggle { display: inline-grid; }
+      .hero { min-height: auto; padding: 8rem 0 4rem; }
+      .hero h1 { font-size: clamp(4rem, 19vw, 6.4rem); }
+      .hero-rule { grid-template-columns: repeat(2, 1fr); }
+      .terminal-body { min-height: 330px; padding: 1rem; }
+      .case-study { min-height: 0; }
+      .case-copy { padding: 2rem 1.25rem 2.5rem; }
+      .case-visual { min-height: 360px; padding: 1.2rem; }
+      .case-meta { grid-template-columns: 1fr; }
+      .dash-cards { grid-template-columns: 1fr 1fr; }
+      .dash-card:last-child { display: none; }
+      .build-row { grid-template-columns: 42px 1fr 24px; min-height: 80px; }
+      .build-tech { display: none; }
+      .tool-grid, .life-grid { grid-template-columns: 1fr; }
+      .contact-panel { grid-template-columns: 1fr; }
+      .contact-links { align-items: flex-start; }
+      .about-copy { font-size: clamp(1.45rem, 7vw, 2.1rem); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+      [data-reveal] { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Daniel English-Brown, home">
+        <span class="brand-mark">DEB</span>
+        <span>Daniel English-Brown</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+
+      <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+        <a href="#work">Work</a>
+        <a href="#research">Research</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="https://github.com/danenglishbrown" target="_blank" rel="noreferrer">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/daniel-english-brown/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Switch colour theme">◐</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-meta">
+              <span>King's College London</span>
+              <span>MSc Theoretical Physics</span>
+              <span>London, UK</span>
+            </div>
+
+            <h1>I build with <span class="accent">physics, maths & code.</span></h1>
+
+            <p class="hero-intro">
+              I'm Daniel English-Brown — a theoretical physics MSc student and developer working across scientific computing, quantitative modelling and full-stack software. I like problems where an equation becomes something tangible: a simulation, model, tool or product.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button primary" href="#work">Selected work ↓</a>
+              <a class="button ghost" href="static/Daniel_English-Brown_CV.pdf" download>Download CV</a>
+              <a class="button ghost" href="mailto:danielenglish.zim13@gmail.com">Email</a>
+            </div>
+          </div>
+
+          <aside class="terminal" aria-label="Technical profile">
+            <div class="terminal-bar">
+              <div class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <span>~/daniel/profile.py</span>
+              <span>PY</span>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+              <div class="code-line"><span class="ln">01</span><span><span class="comment"># current operating context</span></span></div>
+              <div class="code-line"><span class="ln">02</span><span><span class="prompt">>>> </span>daniel.current_work()</span></div>
+              <div class="code-line"><span class="ln">03</span><span>{</span></div>
+              <div class="code-line"><span class="ln">04</span><span>&nbsp;&nbsp;<span class="key">"physics"</span>: <span class="str">"MSc Theoretical Physics"</span>,</span></div>
+              <div class="code-line"><span class="ln">05</span><span>&nbsp;&nbsp;<span class="key">"software"</span>: <span class="str">"Python / Flask / JavaScript"</span>,</span></div>
+              <div class="code-line"><span class="ln">06</span><span>&nbsp;&nbsp;<span class="key">"modelling"</span>: <span class="str">"numerical + quantitative"</span>,</span></div>
+              <div class="code-line"><span class="ln">07</span><span>&nbsp;&nbsp;<span class="key">"building"</span>: <span class="str">"Expendid"</span></span></div>
+              <div class="code-line"><span class="ln">08</span><span>}</span></div>
+              <div class="code-line"><span class="ln">09</span><span>&nbsp;</span></div>
+              <div class="code-line"><span class="ln">10</span><span><span class="prompt">>>> </span><span id="terminalCommand">solve("electromagnetic resonance")</span></span></div>
+              <div class="code-line"><span class="ln">11</span><span id="terminalResponse" class="str">Yee lattice → FDTD → spectral analysis</span></div>
+              <div class="code-line"><span class="ln">12</span><span><span class="prompt">>>> </span><span class="cursor" aria-hidden="true"></span></span></div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="hero-rule">
+          <div><strong>Scientific computing</strong>Numerical methods & simulation</div>
+          <div><strong>Quantitative modelling</strong>Pricing, risk & optimisation</div>
+          <div><strong>Software</strong>Python, Flask & web systems</div>
+          <div><strong>Communication</strong>Teaching, outreach & mentoring</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="wrap section-grid">
+        <div class="section-index">01 / Selected work</div>
+        <div>
+          <p class="eyebrow">Built, tested, shipped</p>
+          <h2 class="section-title">Work that crossed the boundary between theory and practice.</h2>
+          <p class="section-lead">Rather than a grid of equally weighted portfolio cards, these are the projects that best represent how I work: understand the system, build the model, make it useful.</p>
+
+          <div class="work-stack">
+            <article class="case-study" data-reveal>
+              <div class="case-copy">
+                <div class="case-number">01 / PRODUCT ENGINEERING</div>
+                <h3 class="case-title">Expendid</h3>
+                <div class="case-sub">Finance software for freelancers</div>
+                <p class="case-description">As Lead Web Developer / Data Engineer, I worked across the product: Flask back-end functionality, authentication, analytics, pricing, referral and waitlist flows, email automation and responsive front-end architecture.</p>
+                <dl class="case-meta">
+                  <div><dt>Role</dt><dd>Lead Web Developer / Data Engineer</dd></div>
+                  <div><dt>Stack</dt><dd>Python · Flask · JavaScript · Git</dd></div>
+                  <div><dt>Focus</dt><dd>Product systems · analytics · UI/UX</dd></div>
+                  <div><dt>Period</dt><dd>2025 — present</dd></div>
+                </dl>
+                <div class="case-links">
+                  <a class="text-link" href="https://expendid.co.uk" target="_blank" rel="noreferrer">Visit Expendid ↗</a>
+                  <a class="text-link" href="static/web_development_portfolio.pdf" target="_blank">Web portfolio PDF ↗</a>
+                </div>
+                <div class="quote-inline">
+                  <blockquote>“He took my vision and turned it into a beautiful, functional, and professional website.”</blockquote>
+                  <cite>Mintu Sidhu — Founder, Expendid</cite>
+                </div>
+              </div>
+
+              <div class="case-visual">
+                <span class="visual-label">product / interface system</span>
+                <div class="browser" aria-label="Stylised Expendid dashboard illustration">
+                  <div class="browser-top"><span></span><span></span><span></span></div>
+                  <div class="browser-content">
+                    <div class="dash-title"></div>
+                    <div class="dash-sub"></div>
+                    <div class="dash-cards">
+                      <div class="dash-card"><strong>MONTHLY SPEND</strong><b>£2,480</b></div>
+                      <div class="dash-card"><strong>FORECAST</strong><b>+8.4%</b></div>
+                      <div class="dash-card"><strong>INVOICES</strong><b>14</b></div>
+                    </div>
+                    <div class="dash-chart">
+                      <svg viewBox="0 0 500 170" preserveAspectRatio="none" aria-hidden="true">
+                        <path d="M0 130 C55 118, 80 135, 125 104 S205 82, 245 92 S320 52, 365 64 S430 28, 500 36" fill="none" stroke="currentColor" style="color:var(--accent)" stroke-width="3" vector-effect="non-scaling-stroke"/>
+                        <path d="M0 145 C60 140, 105 122, 145 129 S235 110, 285 114 S380 91, 500 101" fill="none" stroke="currentColor" style="color:var(--muted)" stroke-opacity=".42" stroke-width="2" vector-effect="non-scaling-stroke"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="case-study" id="research" data-reveal>
+              <div class="case-copy">
+                <div class="case-number">02 / COMPUTATIONAL PHYSICS</div>
+                <h3 class="case-title">Electromagnetic resonance, simulated.</h3>
+                <div class="case-sub">Finite-Difference Time-Domain solver</div>
+                <p class="case-description">I developed a custom 2D FDTD electromagnetic simulator in Python for dielectric ring resonators: implementing Yee-lattice updates, designing absorbing boundaries, sweeping resonator radius and analysing resonant modes, Free Spectral Range and Q-factors.</p>
+                <dl class="case-meta">
+                  <div><dt>Method</dt><dd>Finite-Difference Time-Domain</dd></div>
+                  <div><dt>Language</dt><dd>Python</dd></div>
+                  <div><dt>Output</dt><dd>Resonant modes · FSR · Q-factor</dd></div>
+                  <div><dt>Result</dt><dd>First-Class project grade</dd></div>
+                </dl>
+                <div class="quote-inline">
+                  <blockquote>“Daniel successfully implemented a working finite difference solver for electromagnetic equations.”</blockquote>
+                  <cite>Dr Francisco Rodríguez-Fortuño — King's College London</cite>
+                </div>
+              </div>
+
+              <div class="case-visual">
+                <span class="visual-label">simulation / field intensity</span>
+                <div class="fdtd-stage">
+                  <canvas id="fdtdCanvas" width="900" height="760" aria-label="Stylised electromagnetic field simulation"></canvas>
+                  <div class="fdtd-overlay"><span class="fdtd-chip">2D Yee lattice</span><span class="fdtd-chip">ring resonator</span><span class="fdtd-chip">|E| field</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="case-study" data-reveal>
+              <div class="case-copy">
+                <div class="case-number">03 / QUANTITATIVE RESEARCH</div>
+                <h3 class="case-title">From equations to markets.</h3>
+                <div class="case-sub">Pricing, portfolio construction & risk</div>
+                <p class="case-description">During my quantitative research internship at Perbak Capital Partners, I worked with Black-Scholes and binomial option-pricing models, non-normal return distributions, volatility analysis, financial time-series and convex optimisation of market-neutral portfolios.</p>
+                <dl class="case-meta">
+                  <div><dt>Models</dt><dd>Black-Scholes · Binomial</dd></div>
+                  <div><dt>Optimisation</dt><dd>CVXPY · market-neutral portfolios</dd></div>
+                  <div><dt>Data</dt><dd>Financial time-series</dd></div>
+                  <div><dt>Tools</dt><dd>Python · NumPy · Pandas</dd></div>
+                </dl>
+                <div class="quote-inline">
+                  <blockquote>“Daniel demonstrated exceptional initiative and quickly grasped new concepts in finance.”</blockquote>
+                  <cite>João Dibo — Perbak Capital Partners</cite>
+                </div>
+              </div>
+
+              <div class="case-visual">
+                <span class="visual-label">model / efficient frontier</span>
+                <div class="quant-stage" aria-label="Stylised efficient frontier visualisation">
+                  <div class="quant-head"><span>PORTFOLIO OPTIMISATION</span><span>risk → return</span></div>
+                  <svg viewBox="0 0 620 380" role="img" aria-label="Efficient frontier scatter plot">
+                    <g stroke="currentColor" style="color:var(--line)" stroke-width="1">
+                      <line x1="70" y1="20" x2="70" y2="330" />
+                      <line x1="70" y1="330" x2="590" y2="330" />
+                      <line x1="70" y1="260" x2="590" y2="260" stroke-dasharray="5 8" />
+                      <line x1="70" y1="190" x2="590" y2="190" stroke-dasharray="5 8" />
+                      <line x1="70" y1="120" x2="590" y2="120" stroke-dasharray="5 8" />
+                    </g>
+                    <g fill="currentColor" style="color:var(--muted)" opacity=".38">
+                      <circle cx="142" cy="285" r="4"/><circle cx="165" cy="250" r="4"/><circle cx="187" cy="274" r="4"/>
+                      <circle cx="204" cy="225" r="4"/><circle cx="225" cy="246" r="4"/><circle cx="248" cy="190" r="4"/>
+                      <circle cx="272" cy="218" r="4"/><circle cx="298" cy="167" r="4"/><circle cx="320" cy="192" r="4"/>
+                      <circle cx="346" cy="134" r="4"/><circle cx="366" cy="161" r="4"/><circle cx="394" cy="111" r="4"/>
+                      <circle cx="420" cy="143" r="4"/><circle cx="448" cy="89" r="4"/><circle cx="478" cy="120" r="4"/>
+                      <circle cx="510" cy="72" r="4"/><circle cx="542" cy="99" r="4"/>
+                    </g>
+                    <path d="M122 305 C170 250, 204 218, 255 185 S348 125, 405 96 S500 58, 560 45" fill="none" stroke="currentColor" style="color:var(--accent)" stroke-width="3"/>
+                    <circle cx="395" cy="101" r="8" fill="currentColor" style="color:var(--accent)" />
+                    <circle cx="395" cy="101" r="16" fill="none" stroke="currentColor" style="color:var(--accent)" opacity=".32" />
+                    <text x="414" y="95" fill="currentColor" style="color:var(--text);font-family:var(--mono);font-size:12px">max Sharpe</text>
+                    <text x="298" y="370" fill="currentColor" style="color:var(--quiet);font-family:var(--mono);font-size:11px">VOLATILITY / RISK</text>
+                    <text transform="translate(18 225) rotate(-90)" fill="currentColor" style="color:var(--quiet);font-family:var(--mono);font-size:11px">EXPECTED RETURN</text>
+                  </svg>
+                  <div class="quant-legend"><span><span class="legend-dot"></span>efficient frontier</span><span>• candidate portfolios</span></div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="builds">
+      <div class="wrap section-grid">
+        <div class="section-index">02 / Other builds</div>
+        <div>
+          <p class="eyebrow">Smaller projects, different problems</p>
+          <h2 class="section-title">A broader trail of things I've built.</h2>
+          <p class="section-lead">The point here is range without pretending every project deserves the same weight as the three above.</p>
+
+          <div class="build-list">
+            <a class="build-row" href="https://danielenglish.me" aria-label="Personal portfolio website">
+              <span class="build-no">01</span><span class="build-name">This portfolio</span><span class="build-tech">HTML · CSS · JavaScript · Flask</span><span class="build-arrow">↗</span>
+            </a>
+            <div class="build-row">
+              <span class="build-no">02</span><span class="build-name">MovieRank Pro</span><span class="build-tech">Flask · CRUD · SQL</span><span class="build-arrow">—</span>
+            </div>
+            <div class="build-row">
+              <span class="build-no">03</span><span class="build-name">Portfolio optimisation toolkit</span><span class="build-tech">Python · CVXPY · CAPM</span><span class="build-arrow">—</span>
+            </div>
+            <div class="build-row">
+              <span class="build-no">04</span><span class="build-name">Hedge-fund investor portal</span><span class="build-tech">Flask · Chart.js · SQL</span><span class="build-arrow">—</span>
+            </div>
+            <div class="build-row">
+              <span class="build-no">05</span><span class="build-name">Parish website</span><span class="build-tech">Flask · JavaScript · responsive UI</span><span class="build-arrow">—</span>
+            </div>
+            <div class="build-row">
+              <span class="build-no">06</span><span class="build-name">Restaurant booking site</span><span class="build-tech">Flask · JavaScript · CSS Grid</span><span class="build-arrow">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="toolkit">
+      <div class="wrap section-grid">
+        <div class="section-index">03 / Toolkit</div>
+        <div>
+          <p class="eyebrow">Tools I actually reach for</p>
+          <h2 class="section-title">No percentage bars. Just the stack.</h2>
+          <div class="tool-grid" data-reveal>
+            <div class="tool-column">
+              <h3>Languages</h3>
+              <ul><li>Python</li><li>JavaScript</li><li>SQL</li><li>MATLAB</li><li>HTML / CSS</li></ul>
+            </div>
+            <div class="tool-column">
+              <h3>Scientific</h3>
+              <ul><li>NumPy</li><li>SciPy</li><li>Pandas</li><li>Matplotlib</li><li>CVXPY</li></ul>
+            </div>
+            <div class="tool-column">
+              <h3>Build</h3>
+              <ul><li>Flask</li><li>Git / GitHub</li><li>Responsive UI</li><li>SQL data stores</li><li>Deployment workflows</li></ul>
+            </div>
+            <div class="tool-column">
+              <h3>Methods</h3>
+              <ul><li>Finite differences</li><li>Optimisation</li><li>Regression</li><li>Time-series analysis</li><li>Data visualisation</li></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap section-grid">
+        <div class="section-index">04 / About</div>
+        <div>
+          <p class="eyebrow">A little more context</p>
+          <h2 class="section-title">The person behind the terminal.</h2>
+
+          <div class="about-grid">
+            <div class="portrait-frame" data-reveal>
+              <figure style="margin:0">
+                <div class="portrait"><img src="static/pfp.jpg" alt="Portrait of Daniel English-Brown" loading="lazy" /></div>
+                <figcaption class="portrait-caption"><span>Daniel English-Brown</span><span>London</span></figcaption>
+              </figure>
+            </div>
+
+            <div>
+              <div class="about-copy" data-reveal>
+                <p>I study theoretical physics at King's College London and have spent much of the last few years turning mathematical ideas into working software.</p>
+                <p class="muted">That has meant building an electromagnetic simulator, modelling options and market-neutral portfolios, developing finance software, teaching physics and mathematics, and helping younger students build and program a competition robot.</p>
+                <p>I am most useful when the problem sits between disciplines — when understanding the theory matters, but so does making the final thing clear, robust and usable.</p>
+              </div>
+
+              <div class="life-grid" data-reveal>
+                <div class="life-item"><span class="life-label">Teaching</span><h3>Physics & mathematics</h3><p>Private tutoring and STEM outreach, with an emphasis on making technical ideas understandable.</p></div>
+                <div class="life-item"><span class="life-label">Mentoring</span><h3>Girls' Robotics Challenge</h3><p>Mentored a team of eight students through designing, building and programming a BBC micro:bit-based robot.</p></div>
+                <div class="life-item"><span class="life-label">Languages</span><h3>English · 中文 · Français</h3><p>Native English, with Mandarin and French proficiency documented in my academic CV.</p></div>
+                <div class="life-item"><span class="life-label">Education</span><h3>King's College London</h3><p>MSc Theoretical Physics following a BSc (Hons) in Theoretical Physics.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="wrap section-grid">
+        <div class="section-index">05 / Contact</div>
+        <div>
+          <p class="eyebrow">Open line</p>
+          <h2 class="section-title">If the problem is interesting, I'd like to hear about it.</h2>
+          <div class="contact-panel" data-reveal>
+            <div>
+              <h3>Let's build something useful.</h3>
+              <p>Software, scientific computing, quantitative modelling, technical collaboration or teaching — email is the simplest way to reach me.</p>
+            </div>
+            <div class="contact-links">
+              <a href="mailto:danielenglish.zim13@gmail.com">danielenglish.zim13@gmail.com ↗</a>
+              <button class="copy-email" id="copyEmail" type="button">Copy email</button>
+              <a href="https://github.com/danenglishbrown" target="_blank" rel="noreferrer">GitHub ↗</a>
+              <a href="https://www.linkedin.com/in/daniel-english-brown/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+              <a href="static/Daniel_English-Brown_CV.pdf" target="_blank">CV ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <span>Daniel English-Brown — physics / software / modelling</span>
+      <span>Built by hand in HTML, CSS & JavaScript · <span id="year"></span></span>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const body = document.body;
+      const themeToggle = document.getElementById('themeToggle');
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.getElementById('navLinks');
+      const copyEmail = document.getElementById('copyEmail');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Theme: stored preference -> system preference -> dark.
+      const storedTheme = localStorage.getItem('deb-theme');
+      const systemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      body.dataset.theme = storedTheme || (systemLight ? 'light' : 'dark');
+
+      themeToggle.addEventListener('click', () => {
+        const next = body.dataset.theme === 'dark' ? 'light' : 'dark';
+        body.dataset.theme = next;
+        localStorage.setItem('deb-theme', next);
+      });
+
+      // Mobile navigation.
+      menuToggle.addEventListener('click', () => {
+        const open = navLinks.classList.toggle('open');
+        menuToggle.setAttribute('aria-expanded', String(open));
+        menuToggle.textContent = open ? '×' : '☰';
+      });
+      navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.textContent = '☰';
+      }));
+
+      // Copy email.
+      copyEmail.addEventListener('click', async () => {
+        const email = 'danielenglish.zim13@gmail.com';
+        try {
+          await navigator.clipboard.writeText(email);
+          const old = copyEmail.textContent;
+          copyEmail.textContent = 'Copied ✓';
+          setTimeout(() => copyEmail.textContent = old, 1400);
+        } catch {
+          window.location.href = `mailto:${email}`;
+        }
+      });
+
+      // Reveal-on-scroll: subtle and disabled for reduced-motion users.
+      const revealItems = document.querySelectorAll('[data-reveal]');
+      if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+        revealItems.forEach(el => el.classList.add('visible'));
+      } else {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealItems.forEach(el => observer.observe(el));
+      }
+
+      // Hero terminal: meaningful technical context, not decorative floating code.
+      const command = document.getElementById('terminalCommand');
+      const response = document.getElementById('terminalResponse');
+      const terminalStates = [
+        ['solve("electromagnetic resonance")', 'Yee lattice → FDTD → spectral analysis'],
+        ['optimise(portfolio)', 'constraints → CVXPY → efficient frontier'],
+        ['build(product)', 'Flask → data → interface → deploy'],
+        ['teach(complex_idea)', 'model → analogy → understanding']
+      ];
+      let terminalIndex = 0;
+      if (!prefersReducedMotion) {
+        setInterval(() => {
+          terminalIndex = (terminalIndex + 1) % terminalStates.length;
+          command.animate([{opacity:1},{opacity:0}], {duration:180}).onfinish = () => {
+            command.textContent = terminalStates[terminalIndex][0];
+            response.textContent = terminalStates[terminalIndex][1];
+            command.animate([{opacity:0},{opacity:1}], {duration:280});
+            response.animate([{opacity:0},{opacity:1}], {duration:280});
+          };
+        }, 3600);
+      }
+
+      // FDTD-inspired canvas: restrained field visualisation.
+      const canvas = document.getElementById('fdtdCanvas');
+      const ctx = canvas.getContext('2d');
+      let raf = null;
+      function drawField(time = 0) {
+        const w = canvas.width;
+        const h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = '#080b10';
+        ctx.fillRect(0, 0, w, h);
+
+        // Grid
+        ctx.strokeStyle = 'rgba(160,180,205,.075)';
+        ctx.lineWidth = 1;
+        for (let x = 0; x <= w; x += 30) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
+        for (let y = 0; y <= h; y += 30) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
+
+        const cx = w * .52;
+        const cy = h * .46;
+        const base = Math.min(w,h) * .22;
+        const pulse = prefersReducedMotion ? 0 : Math.sin(time / 900) * 4;
+
+        // Resonator ring
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.strokeStyle = 'rgba(120,181,255,.95)';
+        ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.arc(0,0,base+pulse,0,Math.PI*2); ctx.stroke();
+        ctx.strokeStyle = 'rgba(120,181,255,.22)';
+        ctx.lineWidth = 20;
+        ctx.beginPath(); ctx.arc(0,0,base+pulse,0,Math.PI*2); ctx.stroke();
+
+        // Standing-wave lobes around ring
+        const lobes = 18;
+        for (let i=0;i<lobes;i++) {
+          const a = i/lobes * Math.PI*2;
+          const amp = 10 + 8 * Math.sin(i * 1.72 + time/700);
+          const r = base + 14;
+          const x = Math.cos(a)*r;
+          const y = Math.sin(a)*r;
+          const alpha = .28 + .5 * (i % 2);
+          ctx.fillStyle = `rgba(103,169,255,${alpha})`;
+          ctx.beginPath(); ctx.arc(x,y,Math.max(2,amp*.35),0,Math.PI*2); ctx.fill();
+        }
+        ctx.restore();
+
+        // Source and field fronts
+        const sx = w*.17, sy = h*.53;
+        ctx.fillStyle = 'rgba(155,214,188,.95)';
+        ctx.beginPath(); ctx.arc(sx,sy,6,0,Math.PI*2); ctx.fill();
+        for (let i=0;i<5;i++) {
+          const phase = prefersReducedMotion ? i*55 : ((time/10 + i*85) % 430);
+          ctx.strokeStyle = `rgba(155,214,188,${.28 - i*.035})`;
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.arc(sx,sy,35+phase*.42,-1.1,1.1);
+          ctx.stroke();
+        }
+
+        // Technical labels
+        ctx.fillStyle = 'rgba(215,222,233,.58)';
+        ctx.font = '18px IBM Plex Mono, monospace';
+        ctx.fillText('Ez', 32, 42);
+        ctx.fillText('t = 4.20 ns', w-190, 42);
+        ctx.fillStyle = 'rgba(103,169,255,.8)';
+        ctx.fillText('εr > 1', cx+base*.62, cy-base*.72);
+
+        if (!prefersReducedMotion) raf = requestAnimationFrame(drawField);
+      }
+      drawField(0);
+      if (!prefersReducedMotion) {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(drawField);
+      }
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
     "image": "https://danielenglish.me/static/pfp.jpg",
     "email": "mailto:danielenglish.zim13@gmail.com",
     "jobTitle": "Web Developer & MSc Theoretical Physics Student",
