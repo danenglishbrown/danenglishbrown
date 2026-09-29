@@ -103,8 +103,9 @@
 
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap"
+        rel="stylesheet">
     <!-- Favicon (drop a real favicon.ico / SVG into static/) -->
     <link rel="icon" href="/static/favicon.ico" sizes="any">
     <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
@@ -1716,6 +1717,503 @@
         [data-theme="light"] .oremus-light {
             display: block;
         }
+
+        /* =========================================================
+           RESPONSIVE / MOBILE FIXES
+           Keep this at the END of the stylesheet
+           ========================================================= */
+        
+        /* Prevent grid/flex children from forcing the page wider */
+        .section-content,
+        .build-list,
+        .build-row,
+        .build-details-inner,
+        .build-prose,
+        .contact-panel,
+        .contact-primary,
+        .contact-primary-action,
+        .contact-primary-text,
+        .email-options {
+            min-width: 0;
+        }
+        
+        
+        /* Release date styling on desktop */
+        .build-release_date {
+            font-family: var(--mono);
+            color: var(--muted);
+            font-size: .7rem;
+            white-space: nowrap;
+        }
+        
+        
+        /* Make all project preview images behave consistently */
+        .other-build-img,
+        .other-builds-img,
+        .future-builds-img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+        
+            border: 1px solid var(--line);
+            border-radius: 12px;
+        }
+        
+        
+        /* Prevent long project names from doing strange things */
+        .build-name {
+            min-width: 0;
+            word-break: normal;
+            overflow-wrap: normal;
+            hyphens: none;
+        }
+        
+        
+        /* =========================================================
+           TABLET
+           ========================================================= */
+        
+        @media (max-width: 1020px) {
+        
+            .build-details-inner {
+                grid-template-columns: minmax(0, 1fr) minmax(210px, 320px);
+                gap: 1.5rem;
+        
+                padding-left: 0;
+                padding-right: 0;
+            }
+        
+            .other-build-row[open] .build-details-inner,
+            .future-build-row[open] .build-details-inner {
+                padding-top: 1.5rem;
+                padding-bottom: 2rem;
+            }
+        
+        }
+        
+        
+        /* =========================================================
+           PHONE
+           ========================================================= */
+        
+        @media (max-width: 760px) {
+        
+            /* ---------- Overall page ---------- */
+        
+            html,
+            body {
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+        
+            .wrap {
+                width: calc(100% - 2rem);
+                max-width: var(--max);
+            }
+        
+            .section {
+                padding: 4.75rem 0;
+            }
+        
+            .section-grid {
+                width: 100%;
+                min-width: 0;
+        
+                grid-template-columns: minmax(0, 1fr);
+                gap: 1.4rem;
+            }
+        
+            .section-index {
+                position: static;
+            }
+        
+            .section-title {
+                font-size: clamp(2.7rem, 13vw, 4.4rem);
+                line-height: .95;
+            }
+        
+            .section-lead {
+                max-width: 100%;
+                font-size: 1rem;
+                line-height: 1.65;
+            }
+        
+        
+            /* ---------- Header ---------- */
+        
+            .nav {
+                gap: 1rem;
+            }
+        
+            .brand {
+                min-width: 0;
+            }
+        
+        
+            /* =====================================================
+               BUILD / FUTURE PROJECT ROWS
+        
+               IMPORTANT:
+               #future-builds .build-row has greater specificity than
+               your old mobile .build-row rule. This explicitly
+               overrides it.
+               ===================================================== */
+        
+            #builds .build-row,
+            #future-builds .build-row,
+            .build-row {
+                grid-template-columns:
+                    42px
+                    minmax(0, 1fr)
+                    26px;
+        
+                gap: .8rem;
+                align-items: center;
+        
+                min-height: 92px;
+                width: 100%;
+                padding: 1rem 0;
+            }
+        
+        
+            /* Hide desktop-only metadata on phones */
+            #builds .build-tech,
+            #future-builds .build-tech,
+            #future-builds .build-release_date,
+            .build-tech,
+            .build-release_date {
+                display: none;
+            }
+        
+        
+            .build-no {
+                align-self: center;
+                font-size: .68rem;
+            }
+        
+        
+            .build-name {
+                width: 100%;
+                min-width: 0;
+        
+                font-size: clamp(1.45rem, 7vw, 2rem);
+                line-height: 1.02;
+                letter-spacing: -.025em;
+        
+                word-break: normal;
+                overflow-wrap: normal;
+                hyphens: none;
+            }
+        
+        
+            .build-arrow {
+                justify-self: end;
+                align-self: center;
+            }
+        
+        
+            /*
+               CRITICAL FIX
+        
+               Desktop:
+               text | image
+        
+               Mobile:
+               text
+               image
+            */
+        
+            .build-details-inner,
+            .build-details-inner:not(:has(img)) {
+                width: 100%;
+                min-width: 0;
+        
+                grid-template-columns: minmax(0, 1fr);
+                gap: 1.4rem;
+        
+                padding-left: 0;
+                padding-right: 0;
+            }
+        
+        
+            .other-build-row[open] .build-details-inner,
+            .future-build-row[open] .build-details-inner {
+                padding-top: 1.35rem;
+                padding-bottom: 1.8rem;
+            }
+        
+        
+            .build-prose {
+                width: 100%;
+                max-width: none;
+                min-width: 0;
+        
+                font-size: .98rem;
+                line-height: 1.7;
+        
+                overflow-wrap: normal;
+                word-break: normal;
+            }
+        
+        
+            .build-prose p {
+                width: 100%;
+                max-width: none;
+            }
+        
+        
+            /*
+               Oremus uses .case-meta inside the Future Builds
+               expanded content. Force those cards to one column too.
+            */
+        
+            .build-prose .case-meta {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 1rem;
+            }
+        
+        
+            .build-prose .case-meta dd {
+                overflow-wrap: break-word;
+            }
+        
+        
+            /* Preview images now sit underneath the prose */
+            .movie-rank-preview,
+            .restaurant-preview,
+            .flashcard-preview,
+            .parish-preview,
+            .oremus-preview {
+                width: 100%;
+                min-width: 0;
+            }
+        
+        
+            .other-build-img,
+            .other-builds-img,
+            .future-builds-img {
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                object-fit: contain;
+            }
+        
+        
+            /* Samurai artwork is wide, so let it use the full card width */
+            #future-builds .future-builds-img {
+                width: 100%;
+            }
+        
+        
+            /* =====================================================
+               CONTACT
+               ===================================================== */
+        
+            .contact-panel {
+                width: 100%;
+                max-width: 100%;
+        
+                grid-template-columns: minmax(0, 1fr);
+        
+                overflow: hidden;
+            }
+        
+        
+            .contact-primary {
+                width: 100%;
+                min-width: 0;
+        
+                padding: 1.4rem;
+        
+                border-right: 0;
+                border-bottom: 1px solid var(--line);
+        
+                overflow: visible;
+            }
+        
+        
+            .email-options {
+                width: 100%;
+                max-width: 100%;
+            }
+        
+        
+            .contact-primary-action {
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+        
+                gap: .8rem;
+                padding: 1rem;
+        
+                align-items: center;
+            }
+        
+        
+            .contact-primary-icon {
+                width: 40px;
+                height: 40px;
+        
+                flex: 0 0 40px;
+            }
+        
+        
+            /*
+               Your old rule used:
+                   white-space: nowrap;
+        
+               which is why this escaped the phone viewport.
+            */
+        
+            .contact-primary-text > span:first-child {
+                white-space: normal;
+        
+                overflow: visible;
+                text-overflow: clip;
+        
+                overflow-wrap: break-word;
+                word-break: normal;
+        
+                line-height: 1.45;
+            }
+        
+        
+            .contact-primary-arrow {
+                flex-shrink: 0;
+            }
+        
+        
+            .contact-note {
+                max-width: 100%;
+        
+                white-space: normal;
+                overflow-wrap: break-word;
+        
+                line-height: 1.5;
+            }
+        
+        
+            .email-menu {
+                left: 0;
+                right: auto;
+        
+                width: min(240px, calc(100vw - 4rem));
+                max-width: 100%;
+            }
+        
+        
+            .contact-secondary {
+                width: 100%;
+        
+                grid-template-columns: minmax(0, 1fr);
+                grid-template-rows: auto;
+            }
+        
+        
+            .contact-card {
+                width: 100%;
+                min-width: 0;
+                min-height: 150px;
+        
+                padding: 1.35rem;
+        
+                border-right: 0;
+            }
+        
+        
+            .contact-card-value {
+                font-size: 1.7rem;
+            }
+        
+        
+            /* ---------- Case studies ---------- */
+        
+            .case-study {
+                width: 100%;
+                grid-template-columns: minmax(0, 1fr);
+            }
+        
+            .case-copy,
+            .case-visual {
+                min-width: 0;
+            }
+        
+        
+            /* ---------- About ---------- */
+        
+            .about-grid,
+            .about-lower,
+            .life-grid {
+                min-width: 0;
+            }
+        
+        
+            /* ---------- Testimonials ---------- */
+        
+            .testimonials,
+            .testimonials-carousel,
+            .testimonial-card,
+            .testimonial-content,
+            .testimonial-text-container {
+                min-width: 0;
+                max-width: 100%;
+            }
+        
+        }
+        
+        
+        /* =========================================================
+           SMALL PHONES
+           ========================================================= */
+        
+        @media (max-width: 480px) {
+        
+            .wrap {
+                width: calc(100% - 1.5rem);
+            }
+        
+            .brand {
+                gap: .55rem;
+                font-size: .75rem;
+                letter-spacing: .045em;
+            }
+        
+            .brand-mark {
+                width: 1.9rem;
+                height: 1.9rem;
+                flex: 0 0 1.9rem;
+            }
+        
+            .section {
+                padding: 4.25rem 0;
+            }
+        
+            #builds .build-row,
+            #future-builds .build-row,
+            .build-row {
+                grid-template-columns:
+                    36px
+                    minmax(0, 1fr)
+                    22px;
+        
+                gap: .55rem;
+            }
+        
+            .build-name {
+                font-size: clamp(1.35rem, 6.8vw, 1.8rem);
+            }
+        
+            .contact-primary {
+                padding: 1rem;
+            }
+        
+            .contact-primary-action {
+                padding: .9rem;
+            }
+        
+        }
     </style>
 </head>
 
@@ -2948,18 +3446,81 @@
             });
         });
 
-        // Reveal-on-scroll: subtle and disabled for reduced-motion users.
+        // Reveal-on-scroll.
+        // Sections animate in whenever they enter the viewport,
+        // disappear after they leave, and animate in again when revisited.
+        //
+        // threshold: 0 fixes the bug with very tall expandable sections:
+        // they remain visible as long as ANY part of them is still in view.
+        
         const revealItems = document.querySelectorAll('[data-reveal]');
-        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-            revealItems.forEach(el => el.classList.add('visible'));
+        if (
+            prefersReducedMotion ||
+            !('IntersectionObserver' in window)
+        ) {
+            revealItems.forEach(el => {
+                el.classList.add('visible');
+            });
         } else {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    entry.target.classList.toggle('visible', entry.isIntersecting);
-                });
-            }, { threshold: 0.12 });
-            revealItems.forEach(el => observer.observe(el));
+        
+            const observer = new IntersectionObserver(
+                entries => {
+                    entries.forEach(entry => {
+                        entry.target.classList.toggle(
+                            'visible',
+                            entry.isIntersecting
+                        );
+                    });
+                },
+                {
+                    threshold: 0,
+        
+                    // Slightly shrinks the active viewport so the reveal still
+                    // feels deliberate rather than firing at the first pixel.
+                    rootMargin: '-4% 0px -4% 0px'
+                }
+            );
+            revealItems.forEach(el => {
+                observer.observe(el);
+            });
         }
+
+
+        // Gracefully remove preview images whose files do not exist.
+        // This prevents Safari/Chrome from displaying the broken-image icon
+        // and lets .build-details-inner:not(:has(img)) fall back to one column.
+        
+        document
+            .querySelectorAll('.other-build-img, .future-builds-img')
+            .forEach(img => {
+                const removeBrokenImage = () => {
+                    const wrapper = img.parentElement;
+                    img.remove();
+                    // If this preview container contains no usable images anymore,
+                    // remove the empty container as well.
+                    if (
+                        wrapper &&
+                        !wrapper.querySelector('img')
+                    ) {
+                        wrapper.remove();
+                    }
+                };
+        
+        
+                img.addEventListener(
+                    'error',
+                    removeBrokenImage,
+                    { once: true }
+                );
+                // Covers images that failed before this script executed.
+                if (
+                    img.complete &&
+                    img.naturalWidth === 0
+                ) {
+                    removeBrokenImage();
+                }
+        
+            });
 
         // Hero terminal: meaningful technical context, not decorative floating code.
         const command = document.getElementById('terminalCommand');
